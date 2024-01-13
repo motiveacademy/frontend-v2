@@ -13,18 +13,18 @@ const BookSection = () => {
     </div>
 
     <div className="space-y-8">
-      <div className="w-fit flex gap-x-4 p-4 rounded shadow">
-        <img src="/product/book-planner.png" alt="Motive Book Planner" />
-        <div className="space-y-4 text-primary-green">
+      <div className="w-fit flex gap-x-8 p-4 rounded shadow">
+        <img src="/product/book-planner.png" alt="Motive Book Planner" className="max-w-sm rounded" />
+        <div className="space-y-4 text-primary-green py-2">
           <p className="text-xl font-bold">Productivity Book Planner</p>
           <p className="max-w-prose leading-7">Motive Productivity Book Planner hadir khusus untukmu yang ingin membangun kehidupan yang produktif. Dalam buku ini, kamu dapat mengatur jadwal mingguan dan bulananmu, membangun habitmu dengan Habit Tracker, menentukan prioritas dengan Matriks Prioritas, dan masih banyak lagi! Dapatkan Book Planner ini dengan klik tombol "Pesan Book Planner" di bawah ini! </p>
           <DefaultButton isLink={true} href={""}>Pesan Book Planner</DefaultButton>
         </div>
       </div>
 
-      <div className="w-fit flex gap-x-4 p-4 rounded shadow">
-        <img src="/product/guidebook.png" alt="Guidebook Motive" />
-        <div className="space-y-4 text-primary-green">
+      <div className="w-fit flex gap-x-8 p-4 rounded shadow">
+        <img src="/product/guidebook.png" alt="Guidebook Motive" className="max-w-sm" />
+        <div className="space-y-4 text-primary-green py-2">
           <p className="text-xl font-bold">Guidebook: Menjadi Pemuda Muslim Seutuhnya</p>
           <p className="max-w-prose leading-7">Menjadi pemuda muslim seutuhnya merupakan keinginan kita semua. Melalui Guidebook ini, kamu akan mendapatkan 30 tips seputar langkah-langkah untuk meraih keberkahan hidup sekaligus memaksimalkan produktivitasmu. Oleh karena itu, unduh Guidebook ini sekarang juga!</p>
           <DefaultButton isLink={true} href={""}>Dapatkan Guidebook</DefaultButton>
