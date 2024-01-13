@@ -62,7 +62,7 @@ const DesktopUserItem = ({ authCookie }) => {
   } else {
     return (
       <div className="space-x-4 font-bold">
-        <DefaultButton type="outlined" onClick={loginHandler}>
+        <DefaultButton type="outlined">
           Login
         </DefaultButton>
         <DefaultButton>Sign Up</DefaultButton>

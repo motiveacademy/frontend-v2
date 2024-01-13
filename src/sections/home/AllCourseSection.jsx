@@ -1,6 +1,21 @@
-const AllCourseSection = () => {
-  return <div>
+"use client"
+
+import CourseBox from "@/commons/components/product/course-box"
+
+const AllCourseSection = ({ courseList }) => {
+  return <section className="text-primary-green space-y-6 p-16">
+    <div className="space-y-2">
+      <h2 className="text-2xl text-primary-green font-bold">
+        <span>Increase{" "}</span>
+        <span className="bg-primary-yellow py-0.5 pl-2 pr-8">Your Skill</span>
+      </h2>
+      <h3 className="text-lg">with Motive Online Course</h3>
     </div>
+
+    <div className="flex gap-x-8">
+      {courseList.map(course => <CourseBox data={course} key={course.id} />)}
+    </div>
+  </section>
 }
 
 export default AllCourseSection

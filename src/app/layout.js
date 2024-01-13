@@ -8,6 +8,7 @@ import { AuthContextProvider } from "@/commons/contexts/auth";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import Footer from "@/commons/components/footer";
 
 config.autoAddCss = false; /* eslint-disable import/first */
 
@@ -49,6 +50,7 @@ export default function RootLayout({ children }) {
             src="https://app.sandbox.midtrans.com/snap/snap.js"
             data-client-key={CLIENTKEY.production}
           /> */}
+          <Footer />
         </body>
       </AuthContextProvider>
     </html>

@@ -21,12 +21,29 @@ export async function getAllLiveClasses() {
 
   const liveClassList = []
   for (let item of res.docs) {
+    const itemData = item.data()
+    const dates = getLiveClassDate(itemData.dates)
+    delete itemData.dates
+
     liveClassList.push({
-      ...item.data(),
-      dates: "",
+      ...itemData,
+      ...dates,
       id: item.id
     })
   }
 
   return liveClassList
+}
+
+function getLiveClassDate(dates) {
+  const date = new Date(dates.seconds * 1000)
+  return {
+    date,
+    dateOptions: {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  }
 }

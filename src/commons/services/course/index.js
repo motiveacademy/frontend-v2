@@ -5,18 +5,15 @@ import { getDoc, getDocs, doc, collection } from "firebase/firestore";
 // import DOMAIN from "@/commons/utils/environment";
 
 export async function getAllCourse() {
-  const colRef = collection(db, "courses");
+  const colRef = collection(db, "course");
   const res = await getDocs(colRef);
 
   let courseList = [];
   res.forEach((course) => {
-    let data = {
+    courseList.push({
       ...course.data(),
       id: course.id,
-    };
-    if (data.status === "PUBLISHED") {
-      courseList.push(data);
-    }
+    });
   });
 
   return courseList;

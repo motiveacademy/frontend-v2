@@ -3,9 +3,9 @@
 import Link from "next/link";
 
 const OUTLINED_STYLING =
-  "p-4 py-2 border border-primary-green rounded hover:bg-slate-300 hover:border-secondary-green hover:cursor-pointer";
-const SOLID_STLING =
-  "px-4 py-2 text-white bg-primary-green border border-primary-green rounded hover:bg-secondary-green hover:border-secondary-green hover:cursor-pointer";
+  "max-w-fit p-4 py-2 border border-primary-green rounded hover:bg-slate-300 hover:border-secondary-green hover:cursor-pointer";
+const SOLID_STYLING =
+  "max-w-fit px-4 py-2 text-white bg-primary-green border border-primary-green rounded hover:bg-secondary-green hover:border-secondary-green hover:cursor-pointer";
 
 const DefaultButton = ({
   isLink,
@@ -16,9 +16,9 @@ const DefaultButton = ({
   children,
 }) => {
   if (isLink) {
-    <Link href={href} className={`block ${getStyling(type)}`}>
+    return <Link href={href} className={`block ${getStyling(type)}`}>
       {children}
-    </Link>;
+    </Link>
   } else {
     return (
       <button onClick={onClick} className={getStyling(type)}>
@@ -34,7 +34,7 @@ const getStyling = (type) => {
       return OUTLINED_STYLING;
 
     default:
-      return SOLID_STLING;
+      return SOLID_STYLING;
   }
 };
 
