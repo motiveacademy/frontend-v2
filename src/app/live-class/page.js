@@ -1,14 +1,23 @@
-import { getAllLiveClasses } from "@/commons/services/live-class";
+import { getAllLiveClasses, getLiveClassTesti } from "@/commons/services/live-class";
 import AboutLC from "@/sections/live-class/AboutLC";
 import OnGoingLC from "@/sections/live-class/OnGoingLC";
+import PreviousLC from "@/sections/live-class/PreviousLC";
+import TestiLC from "@/sections/live-class/TestiLC";
 
 const LiveClassPage = async () => {
   const liveClasses = await getAllLiveClasses();
+  const lcTestiData = await getLiveClassTesti()
 
-  return <main>
-    <AboutLC />
-    <OnGoingLC data={liveClasses.at(-1)} />
-  </main>
-}
+  return (
+    <main>
+      <AboutLC />
+      <OnGoingLC data={liveClasses.at(0)} />
+      <div className="flex px-16 pb-16">
+        <PreviousLC lcList={liveClasses} />
+        <TestiLC testiList={lcTestiData.testiList} />
+      </div>
+    </main>
+  );
+};
 
-export default LiveClassPage
+export default LiveClassPage;
