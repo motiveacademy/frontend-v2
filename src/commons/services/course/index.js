@@ -46,7 +46,7 @@ export async function getCourse(courseID) {
 
 export async function getCourseTrailer(courseID) {
   const videoRef = ref(storage, `course/${courseID}/trailer.mp4`);
-  const videoLink = await getDownloadURL(picRef).catch((err) => {
+  const videoLink = await getDownloadURL(videoRef).catch((err) => {
     return "";
   });
 
@@ -58,28 +58,7 @@ export async function addCourseTopic(courseID, parentIDs, topicData) {
   await setDoc(ref, topicData);
 }
 
-export async function getCourseTopic(courseID) {
-  const ref = collection(db, "course", courseID, "topic");
-  const courseQuery = query(ref, orderBy("topicNum"));
-  const res = await getDocs(courseQuery);
-
-  const topicList = [];
-  res.forEach(async (topic) => {
-    const subtopic = await getSubtopic([courseID, "topic", topic.id, "topic"]);
-    const topicData = topic.data();
-
-    topicList.push({
-      id: topic.id,
-      title: topicData.title,
-      topicNum: topicData.topicNum,
-      subtopic,
-    });
-  });
-
-  return topicList;
-}
-
-export async function getSubtopic(parentIDs) {
+export async function getCourseTopic(parentIDs) {
   const ref = collection(db, "course", ...parentIDs);
   const topicQuery = query(ref, orderBy("topicNum"));
   const res = await getDocs(topicQuery);
@@ -100,7 +79,7 @@ export async function getSubtopic(parentIDs) {
     });
 
     for (let topic of topicList) {
-      topic.subtopic = await getSubtopic([...parentIDs, topic.id, "topic"]);
+      topic.subtopic = await getCourseTopic([...parentIDs, topic.id, "topic"]);
     }
 
     return topicList;

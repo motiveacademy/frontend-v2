@@ -1,7 +1,7 @@
 "use client";
 
 import DefaultButton from "@/commons/components/button";
-import { addCourseTopic, getCourseTopic, getSubtopic } from "@/commons/services/course";
+import { addCourseTopic, getCourseTopic } from "@/commons/services/course";
 import { useRef, useState } from "react";
 
 const EXAMPLE = [
@@ -17,8 +17,6 @@ const AddTopicSection = () => {
   const [selectIds, setSelectIds] = useState([]);
   const [loading, setLoading] = useState(false);
   const [courseList, setCourseList] = useState(EXAMPLE);
-
-  const courseRef = useRef();
 
   const idRef = useRef();
   const nameRef = useRef();
@@ -42,7 +40,7 @@ const AddTopicSection = () => {
     e.preventDefault()
     console.log(`Changing course... KBO`);
 
-    const courses = await getSubtopic(["course-KBO", "topic"]);
+    const courses = await getCourseTopic(["course-KBO", "topic"]);
     setCourseList(courses);
   };
 
@@ -50,7 +48,7 @@ const AddTopicSection = () => {
     e.preventDefault()
     console.log(`Changing course... PCO`);
 
-    const courses = await getSubtopic(["course-PCO", "topic"]);
+    const courses = await getCourseTopic(["course-PCO", "topic"]);
     setCourseList(courses);
   };
 
