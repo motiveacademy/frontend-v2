@@ -12,7 +12,7 @@ const LatestLC = ({ data }) => {
     </p>
 
     <div className="flex pl-8 gap-x-4">
-      <div className='max-w-sm'>
+      <div className='w-[50%] max-w-sm'>
         <SuspenseImage src={`live-class/${data.id}/poster.png`} />
       </div>
       <div className="space-y-2">

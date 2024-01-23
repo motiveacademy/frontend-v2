@@ -4,7 +4,7 @@ import AllCourse from "@/sections/online-course/AllCourse";
 const OnlineCoursePage = async () => {
   const courses = await getAllCourse();
 
-  return <main className="p-16">
+  return <main className="p-16 min-h-screen">
     <AllCourse courseList={courses} />
   </main>;
 };

@@ -1,5 +1,5 @@
 const MoveUser = ({ userList }) => {
-  console.log(userList);
+  // console.log(userList);
 
   return (
     <section>

@@ -1,6 +1,6 @@
 const MyLearning = () => {
   return (
-    <main className="">
+    <main className="min-h-screen">
       
     </main>
   );
