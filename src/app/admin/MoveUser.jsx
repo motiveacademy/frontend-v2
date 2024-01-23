@@ -4,11 +4,11 @@ const MoveUser = ({ userList }) => {
   return (
     <section>
       <h1 className="text-2xl font-bold">Move User</h1>
-      {userList.map((user) => (
+      {/* {userList.map((user) => (
         <div>
           <p>{`${user.authID.substring(0,6)} - ${user.name}`}</p>
         </div>
-      ))}
+      ))} */}
     </section>
   );
 };

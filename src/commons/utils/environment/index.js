@@ -1,7 +1,7 @@
 const ENV_DOMAIN = {
   development: "http://localhost:3000/",
-  preview: "https://motivea-redesign.vercel.app",
-  production: "https://motivea-redesign.vercel.app",
+  preview: "https://motive-redesign-preview.vercel.app",
+  production: "https://motive-redesign-preview.vercel.app",
 };
 
 const env = process.env.NODE_ENV;
