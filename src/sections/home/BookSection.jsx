@@ -17,7 +17,7 @@ const BookSection = () => {
         <img src="/product/book-planner.png" alt="Motive Book Planner" className="max-w-sm rounded" />
         <div className="space-y-4 text-primary-green py-2">
           <p className="text-xl font-bold">Productivity Book Planner</p>
-          <p className="max-w-prose leading-7">Motive Productivity Book Planner hadir khusus untukmu yang ingin membangun kehidupan yang produktif. Dalam buku ini, kamu dapat mengatur jadwal mingguan dan bulananmu, membangun habitmu dengan Habit Tracker, menentukan prioritas dengan Matriks Prioritas, dan masih banyak lagi! Dapatkan Book Planner ini dengan klik tombol "Pesan Book Planner" di bawah ini! </p>
+          <p className="max-w-prose leading-7">Motive Productivity Book Planner hadir khusus untukmu yang ingin membangun kehidupan yang produktif. Dalam buku ini, kamu dapat mengatur jadwal mingguan dan bulananmu, membangun habitmu dengan Habit Tracker, menentukan prioritas dengan Matriks Prioritas, dan masih banyak lagi! Dapatkan Book Planner ini dengan klik tombol &quot;Pesan Book Planner&quot; di bawah ini! </p>
           <DefaultButton isLink={true} href={""}>Pesan Book Planner</DefaultButton>
         </div>
       </div>
