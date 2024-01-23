@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@commons/auth/config";
+import { db } from "@/commons/auth/config";
 import { setDoc, doc } from "firebase/firestore";
 
 export async function POST(req) {

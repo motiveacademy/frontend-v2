@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { RAJA_ONGKIR_API } from "@commons/utils/ongkir";
+import { RAJA_ONGKIR_API } from "@/commons/utils/ongkir";
 import { RAJA_ONGKIR_API_KEY } from "../route";
 
 export async function POST(req) {

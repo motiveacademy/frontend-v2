@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { RAJA_ONGKIR_API } from "@commons/utils/ongkir";
+import { RAJA_ONGKIR_API } from "@/commons/utils/ongkir";
 
 export const RAJA_ONGKIR_API_KEY = "09c0b395c667885fe25ecd6e2b14d5a2";
 

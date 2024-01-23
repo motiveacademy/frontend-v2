@@ -14,8 +14,6 @@ const CoursePage = async ({ params }) => {
     trailer: courseTrailer
   }
 
-  console.log(courseData)
-
   return (
     <main className="flex p-16 space-x-8">
       <DetailCourse data={courseData} />

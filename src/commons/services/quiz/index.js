@@ -1,4 +1,4 @@
-import { db } from "@commons/auth/config";
+import { db } from "@/commons/auth/config";
 import {
   getDoc,
   doc,
