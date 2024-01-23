@@ -7,6 +7,11 @@ const DetailCourse = ({ data }) => {
   return (
     <section className="w-full max-w-[65vw] pr-16 text-primary-green space-y-8">
       {/* Last Watched */}
+      <div className="w-full max-w-[65vw] space-y-2">
+        <h1 className="text-2xl font-bold">{data.name}</h1>
+        <p className="leading-7 whitespace-pre-wrap">{data.summary}</p>
+      </div>
+      
       <div className="space-y-2">
         <p>
           <span className="font-bold">Course </span>Statistics

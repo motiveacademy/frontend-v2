@@ -1,6 +1,6 @@
 const VideoPlayer = ({ src }) => {
   return (
-    <div className="rounded-2xl shadow-2xl">
+    <div className="rounded-2xl shadow">
       <video controls className="w-full aspect-video rounded-2xl">
         <source src={src} type="video/mp4" />
       </video>

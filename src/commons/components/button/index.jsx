@@ -3,9 +3,9 @@
 import Link from "next/link";
 
 const OUTLINED_STYLING =
-  "max-w-fit p-4 py-2 border border-primary-green rounded hover:bg-slate-300 hover:border-secondary-green hover:cursor-pointer";
+  "inline-block w-fit p-4 py-2 border border-primary-green rounded hover:bg-slate-300 hover:border-secondary-green hover:cursor-pointer";
 const SOLID_STYLING =
-  "max-w-fit px-4 py-2 text-white bg-primary-green border border-primary-green rounded hover:bg-secondary-green hover:border-secondary-green hover:cursor-pointer";
+  "inline-block max-w-fit px-4 py-2 text-white bg-primary-green border border-primary-green rounded hover:bg-secondary-green hover:border-secondary-green hover:cursor-pointer";
 
 const DefaultButton = ({
   isLink,

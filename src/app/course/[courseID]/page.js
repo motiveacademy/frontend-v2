@@ -5,7 +5,7 @@ import OverviewCourse from "@/sections/online-course/detail/OverviewCourse";
 const CoursePage = async ({ params }) => {
   const courseID = params.courseID;
   const course = await getCourse(courseID);
-  const courseTrailer = await getCourseTrailer(courseID)
+  const courseTrailer = await getCourseTrailer(course.pid)
   const courseTopic = await getCourseTopic([course.pid, "topic"]);
 
   const courseData = {
@@ -14,10 +14,12 @@ const CoursePage = async ({ params }) => {
     trailer: courseTrailer
   }
 
+  console.log(courseData)
+
   return (
-    <main className="p-16 space-y-8">
-      <OverviewCourse data={courseData} />
+    <main className="flex p-16 space-x-8">
       <DetailCourse data={courseData} />
+      <OverviewCourse data={courseData} />
     </main>
   );
 };

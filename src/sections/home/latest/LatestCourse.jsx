@@ -17,7 +17,7 @@ const LatestCourse = ({
 
       <div className="max-w-sm pl-8 space-y-4">
         <div>
-          <SuspenseImage src={`course/${data.id}/cover.png`} />
+          <SuspenseImage src={`course/${data.pid}/cover.png`} />
         </div>
 
         <p className="text-xl text-primary-green font-bold">{data.name}</p>

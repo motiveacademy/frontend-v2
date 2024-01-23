@@ -1,5 +1,5 @@
 const ENV_DOMAIN = {
-  development: process.env.DEVELOPMENT_DOMAIN,
+  development: "http://localhost:3000/",
   preview: process.env.PREVIEW_DOMAIN,
   production: process.env.PRODUCTION_DOMAIN,
 };

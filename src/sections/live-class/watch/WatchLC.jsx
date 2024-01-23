@@ -4,7 +4,7 @@ const WatchLC = ({ data }) => {
   return (
     <section className="w-full max-w-[70vw] space-y-8">
       <VideoPlayer src={data.recordLink} />
-      <div className="p-4 text-primary-green shadow-2xl border space-y-4">
+      <div className="p-4 text-primary-green rounded-lg border space-y-4">
         <div className="space-y-2">
           <p className="w-fit bg-primary-yellow px-2 py-1 rounded font-bold text-sm">
             {`${new Intl.DateTimeFormat("id-ID", { month: "long" }).format(

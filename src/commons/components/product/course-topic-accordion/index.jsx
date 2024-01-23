@@ -40,9 +40,9 @@ const CourseTopicAccordion = ({ data, idx, parentNum }) => {
               onClick={() => setOpenSubtopic(!openSubtopic)}
             >
               {openSubtopic ? (
-                <FontAwesomeIcon icon={faChevronDown} />
-              ) : (
                 <FontAwesomeIcon icon={faChevronUp} />
+              ) : (
+                <FontAwesomeIcon icon={faChevronDown} />
               )}
             </p>
           </div>

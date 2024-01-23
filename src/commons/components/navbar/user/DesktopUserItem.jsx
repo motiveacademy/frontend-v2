@@ -1,47 +1,53 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useReducer } from "react";
 
-import login, { getSignInResult } from "@/commons/services/login";
+import { getSignInResult } from "@/commons/services/login";
+import { verifyAccessToken } from "@/commons/services/login/verify";
 import { useAuthContext } from "@/commons/contexts/auth";
-import { auth as firebaseAuth } from "@/commons/auth/config";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import DefaultButton from "@/commons/components/button";
-import { verifyAccessToken } from "../../../services/login";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const DesktopUserItem = ({ authCookie }) => {
   const [auth, setAuth] = useAuthContext();
-
-  const loginHandler = async () => {
-    await login();
-  };
+  const router = useRouter();
 
   useEffect(() => {
-    const redirectHandler = async () => {
-      const uid = await getSignInResult();
-      if (uid !== null) {
+    const reLoginHandler = async () => {
+      const decodedToken = await verifyAccessToken(authCookie.value);
+      if (decodedToken !== "Invalid Key") {
         setAuth({
           isAuth: true,
-          uid,
+          uid: decodedToken,
+        });
+      } else {
+        setAuth({
+          isAuth: false,
+          uid: null,
         });
       }
     };
 
-    const reLoginHandler = async () => {
-      const decodedToken = await verifyAccessToken(authCookie.value)
-      // console.log(decodedToken)
-      setAuth({
-        isAuth: true,
-        uid: null,
-      });
+    const awaitLoginHandler = async () => {
+      const uid = await getSignInResult();
+      if (uid !== null) {
+        setAuth({
+          isAuth: true,
+          uid: uid.substring(0, 6),
+        });
+
+        router.push("/my-learning");
+      }
     };
 
-    if (!auth.isAuth && authCookie) {
+    if (auth.isAuth === false && authCookie) {
       reLoginHandler();
-    } else if (!auth.isAuth && authCookie === undefined) {
-      redirectHandler();
+    } else if (auth.isAuth === false && authCookie === undefined) {
+      awaitLoginHandler();
     }
   }, [auth]);
 
@@ -49,12 +55,16 @@ const DesktopUserItem = ({ authCookie }) => {
     return (
       <div className="flex items-center gap-x-4">
         <p className="text-xl hover:cursor-pointer hover:text-primary-green">
-          <FontAwesomeIcon icon={faCartShopping} />
+          <Link href="/cart">
+            <FontAwesomeIcon icon={faCartShopping} />
+          </Link>
         </p>
         <DefaultButton type="outlined">
           <div className="flex items-center gap-x-2">
             <FontAwesomeIcon icon={faUser} />
-            <p className="text-primary-green">Profile</p>
+            <Link className="text-primary-green" href="/my-learning">
+              My Learning
+            </Link>
           </div>
         </DefaultButton>
       </div>
@@ -62,7 +72,7 @@ const DesktopUserItem = ({ authCookie }) => {
   } else {
     return (
       <div className="space-x-4 font-bold">
-        <DefaultButton type="outlined">
+        <DefaultButton type="outlined" isLink={true} href="/signin">
           Login
         </DefaultButton>
         <DefaultButton>Sign Up</DefaultButton>
