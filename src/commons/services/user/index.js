@@ -1,8 +1,5 @@
 import { db } from "@/commons/auth/config";
 import { getDoc, doc, getDocs, collection, setDoc } from "firebase/firestore";
-// import { cookies } from "next/headers";
-// import { redirect } from "next/navigation";
-// import { signInWithPopup } from "firebase/auth";
 
 export async function getAllUser() {
   const userRef = collection(db, "users");

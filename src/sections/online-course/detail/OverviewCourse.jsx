@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { useAuth } from "@/commons/contexts/auth";
+import { useEffect, useState } from "react";
 
 import DefaultButton from "@/commons/components/button";
 import VideoPlayer from "@/commons/components/video-player";
@@ -10,10 +9,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { addCart } from "@/commons/services/cart";
 import { hardRedirect } from "@/commons/services/redirect";
 
-
-const OverviewCourse = ({ data }) => {
+const OverviewCourse = ({ data, userData }) => {
   const [loading, setLoading] = useState();
-  const auth = useAuth()
+  const [eligible, setEligibile] = useState(false);
+
+  useEffect(() => {
+    if (userData?.availableProduct?.includes(data.pid)) {
+      setEligibile(true);
+    }
+  });
 
   const courseHandler = async () => {
     setLoading(true);
@@ -43,16 +47,18 @@ const OverviewCourse = ({ data }) => {
         <p className="text-xl mt-4 mb-8">
           <span className="font-bold">Course </span>Intro
         </p>
-        <div className="flex justify-between items-center pt-4 border-t border-slate-300">
-          <p className="font-lato font-bold text-2xl">Rp{data.normalPrice}</p>
-          {loading ? (
-            <p className="text-2xl my-2">
-              <FontAwesomeIcon icon={faCircleNotch} spin={true} />
-            </p>
-          ) : (
-            <DefaultButton onClick={courseHandler}>Get Course</DefaultButton>
-          )}
-        </div>
+        {!eligible && (
+          <div className="flex justify-between items-center pt-4 border-t border-slate-300">
+            <p className="font-lato font-bold text-2xl">Rp{data.normalPrice}</p>
+            {loading ? (
+              <p className="text-2xl my-2">
+                <FontAwesomeIcon icon={faCircleNotch} spin={true} />
+              </p>
+            ) : (
+              <DefaultButton onClick={courseHandler}>Get Course</DefaultButton>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

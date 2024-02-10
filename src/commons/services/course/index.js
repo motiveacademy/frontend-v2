@@ -70,7 +70,7 @@ export async function getCourseTopic(parentIDs) {
 
     res.forEach(async (topic) => {
       const topicData = topic.data();
-  
+
       topicList.push({
         id: topic.id,
         title: topicData.title,
@@ -86,52 +86,18 @@ export async function getCourseTopic(parentIDs) {
   }
 }
 
-// export function checkEligiblity(userData, productID) {
-//   const availableProduct = userData.availableProduct;
+export async function getLastWatched(userID, courseID) {
+  const ref = doc(db, "user", userID, "course", courseID);
+  const res = await getDoc(ref);
 
-//   let isEligible = false;
-//   if (availableProduct) {
-//     for (let itemID of availableProduct) {
-//       if (itemID === productID) {
-//         isEligible = true;
-//         break;
-//       }
-//     }
-//   }
+  return res.data();
+}
 
-//   return isEligible;
-// }
+export async function getCurrentTopic(courseID, topicID) {
+  const videoRef = ref(storage, `course/${courseID}/videos/${topicID}/hd.mp4`);
+  const videoLink = await getDownloadURL(videoRef).catch((err) => {
+    return "";
+  });
 
-// export async function addCart(cartData, custID, orderID) {
-//   const reqData = {
-//     cartData,
-//     custID,
-//     orderID,
-//   };
-
-//   const res = await fetch(`${DOMAIN}/api/payment`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(reqData),
-//   });
-
-//   const data = await res.json();
-//   return data;
-// }
-
-// export function createOrderID(userID, courseID) {
-//   const date = new Date();
-//   return `${userID}_${courseID}_${date
-//     .getTime()
-//     .toString()
-//     .slice(-7, -1)}`;
-// }
-
-// export async function getCoverImage(courseID){
-//   const coverPathRef = ref(storage, `courses/${courseID}/cover/cover.jpg`);
-//   const coverURL = await getDownloadURL(coverPathRef);
-
-//   return coverURL;
-// };
+  return videoLink;
+}

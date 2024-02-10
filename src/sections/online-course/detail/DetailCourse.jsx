@@ -1,17 +1,48 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import CourseTopicAccordion from "@/commons/components/product/course-topic-accordion";
 import { faHourglassHalf } from "@fortawesome/free-regular-svg-icons";
-import { faVideo } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlay, faVideo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DefaultButton from "@/commons/components/button";
 
-const DetailCourse = ({ data }) => {
+const DetailCourse = ({ data, userData }) => {
+  const [eligible, setEligibile] = useState(false);
+  useEffect(() => {
+    if (userData?.availableProduct?.includes(data.pid)) {
+      setEligibile(true);
+    }
+  });
+
   return (
     <section className="w-full max-w-[65vw] pr-16 text-primary-green space-y-8">
-      {/* Last Watched */}
-      <div className="w-full max-w-[65vw] space-y-2">
+      {eligible && (
+        <div className="w-full flex justify-between items-center bg-slate-100 rounded py-4 px-8">
+          <div className="flex items-center space-x-4">
+            <p className="text-2xl">
+              <FontAwesomeIcon icon={faCirclePlay} />
+            </p>
+            <div>
+              <p className="">Last Watched</p>
+              <p className="text-xl font-bold">Apa Itu Berkah</p>
+            </div>
+          </div>
+          <DefaultButton
+            isLink={true}
+            href={`/course/${data.id}/watch/${data.lastWatched.id}`}
+          >
+            Continue Learning
+          </DefaultButton>
+        </div>
+      )}
+
+      <div className="w-full space-y-2">
         <h1 className="text-2xl font-bold">{data.name}</h1>
         <p className="leading-7 whitespace-pre-wrap">{data.summary}</p>
       </div>
-      
+
       <div className="space-y-2">
         <p>
           <span className="font-bold">Course </span>Statistics
@@ -36,14 +67,20 @@ const DetailCourse = ({ data }) => {
         </div>
       </div>
 
-      <div>
+      <div className="space-y-2">
         <p>
           <span className="font-bold">Course </span>Content
         </p>
 
         <div>
-          {data.topic.map((topic, idx) => (
-            <CourseTopicAccordion data={topic} idx={idx} parentNum={null} key={topic.id} />
+          {data.topic.map((topic) => (
+            <CourseTopicAccordion
+              key={topic.id}
+              data={topic}
+              isTopicMain={true}
+              eligible={eligible}
+              courseID={data.id}
+            />
           ))}
         </div>
       </div>
