@@ -1,7 +1,9 @@
 import {
+  findTopicById,
   getCourse,
   getCourseTopic,
-  getCurrentTopic,
+  getCurrentVid,
+  getWatchedData,
 } from "@/commons/services/course";
 import { getUser } from "@/commons/services/user";
 import { getCurrentUser } from "@/commons/services/user/current";
@@ -14,28 +16,43 @@ const WatchCoursePage = async ({ params }) => {
   const userID = await getCurrentUser();
   const courseID = params.courseID;
   const topicID = params.videoID;
-
-  let userData = null;
-  if (userID !== 403) {
-    userData = await getUser(userID);
-  } else {
+  
+  if (userID === 403) {
     redirect(`/course/${courseID}`);
   }
 
   const course = await getCourse(courseID);
   const courseTopic = await getCourseTopic([course.pid, "topic"]);
-  const currentVid = await getCurrentTopic(course.pid, "apa-itu-berkah");
+  const currentTopic = await findTopicById(courseTopic, topicID)
+  const userWatchedData = await getWatchedData(userID, course.pid)
+  const vidLink = await getCurrentVid(course.pid, "apa-itu-berkah");
+
+  const courseData = {
+    ...course,
+    topic: courseTopic
+  }
+
+  const topicData = {
+    id: topicID,
+    name: currentTopic?.title ?? "",
+    videoLink: vidLink
+  }
+
+  const userData = {
+    ...userWatchedData,
+    userID
+  }
 
   return (
-    <main className="flex w-full">
-      <div className="w-full max-w-[75vw]">
+    <main className="md:flex w-full">
+      <div className="w-full md:max-w-[75vw]">
         <WatchCourseHeader
           courseName={course.name}
-          topicName={"Apa Itu Berkah ?"}
+          topicName={topicData.name}
         />
-        <WatchCourse courseData={course} videoLink={currentVid} />
+        <WatchCourse courseData={course} topicData={topicData} userData={userData} />
       </div>
-      <CourseContent courseID={courseID} courseTopic={courseTopic} />
+      <CourseContent courseData={courseData} watchedData={userWatchedData.completedVideo} />
     </main>
   );
 };

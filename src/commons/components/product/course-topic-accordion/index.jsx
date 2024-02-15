@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
   faChevronUp,
+  faCircleCheck,
   faPlay,
   faTv,
 } from "@fortawesome/free-solid-svg-icons";
@@ -25,12 +26,18 @@ const topicNumStyling = [
   "bg-fuchsia-100",
 ];
 
-const CourseTopicAccordion = ({ data, isTopicMain, eligible, courseID }) => {
+const CourseTopicAccordion = ({
+  data,
+  isTopicMain,
+  eligible,
+  courseID,
+  watchedData,
+}) => {
   const [openSubtopic, setOpenSubtopic] = useState(false);
 
   if (data.subtopic?.length > 0) {
     return (
-      <div className="border-collapse ">
+      <div className="border-collapse select-none">
         <div
           className={`bg-slate-100 border px-4 py-8 flex justify-between gap-x-6 hover:cursor-pointer hover:bg-slate-300`}
           onClick={() => setOpenSubtopic(!openSubtopic)}
@@ -49,7 +56,7 @@ const CourseTopicAccordion = ({ data, isTopicMain, eligible, courseID }) => {
               className={` font-bold bg-primary-green text-primary-white rounded px-4 py-2`}
             >
               {openSubtopic ? (
-                <span className=" ">
+                <span className="">
                   <FontAwesomeIcon icon={faChevronUp} />
                 </span>
               ) : (
@@ -71,6 +78,7 @@ const CourseTopicAccordion = ({ data, isTopicMain, eligible, courseID }) => {
               isTopicMain={false}
               eligible={eligible}
               courseID={courseID}
+              watchedData={watchedData}
             />
           ))}
         </div>
@@ -78,7 +86,10 @@ const CourseTopicAccordion = ({ data, isTopicMain, eligible, courseID }) => {
     );
   } else {
     return (
-      <Link prefetch={false} href={`/course/${courseID}/watch/${data.id}`}>
+      <Link
+        prefetch={false}
+        href={eligible ? `/course/${courseID}/watch/${data.id}` : "#"}
+      >
         <div
           className={`p-4 flex justify-between gap-x-4 hover:cursor-pointer hover:bg-slate-300 ${
             isTopicMain ? "bg-slate-100" : ""
@@ -87,7 +98,11 @@ const CourseTopicAccordion = ({ data, isTopicMain, eligible, courseID }) => {
           <div className="flex items-center gap-x-4">
             <p className="text-2xl">
               {eligible ? (
-                <FontAwesomeIcon icon={faCircle} />
+                watchedData?.includes(data.id) ? (
+                  <FontAwesomeIcon icon={faCircleCheck} />
+                ) : (
+                  <FontAwesomeIcon icon={faCircle} />
+                )
               ) : (
                 <FontAwesomeIcon icon={faSquareCaretRight} />
               )}
@@ -96,7 +111,7 @@ const CourseTopicAccordion = ({ data, isTopicMain, eligible, courseID }) => {
           </div>
           {eligible && (
             <p
-              className={`px-4 py-2 rounded border border-primary-green font-bold flex gap-x-2 items-center hover:bg-slate-300 hover:cursor-pointer`}
+              className={`px-4 py-2 rounded border border-primary-green font-bold flex gap-x-2 items-center`}
             >
               <FontAwesomeIcon icon={faPlay} />
               <span>Play</span>

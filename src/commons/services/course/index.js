@@ -58,6 +58,11 @@ export async function addCourseTopic(courseID, parentIDs, topicData) {
   await setDoc(ref, topicData);
 }
 
+export async function addLastWatched(courseID, userID, data) {
+  const ref = doc(db, "user", userID, "course", courseID);
+  await setDoc(ref, data, { merge: true });
+}
+
 export async function getCourseTopic(parentIDs) {
   const ref = collection(db, "course", ...parentIDs);
   const topicQuery = query(ref, orderBy("topicNum"));
@@ -75,6 +80,7 @@ export async function getCourseTopic(parentIDs) {
         id: topic.id,
         title: topicData.title,
         topicNum: topicData.topicNum,
+        parentIDs,
       });
     });
 
@@ -86,18 +92,37 @@ export async function getCourseTopic(parentIDs) {
   }
 }
 
-export async function getLastWatched(userID, courseID) {
+export async function getWatchedData(userID, courseID) {
   const ref = doc(db, "user", userID, "course", courseID);
   const res = await getDoc(ref);
 
-  return res.data();
+  if (res.exists()) {
+    return { ...res.data() };
+  } else {
+    return null;
+  }
 }
 
-export async function getCurrentTopic(courseID, topicID) {
+export async function getCurrentVid(courseID, topicID) {
   const videoRef = ref(storage, `course/${courseID}/videos/${topicID}/hd.mp4`);
   const videoLink = await getDownloadURL(videoRef).catch((err) => {
     return "";
   });
 
   return videoLink;
+}
+
+export function findTopicById(topicList, topicID) {
+  for (let topic of topicList) {
+    if (topic.id === topicID) {
+      return topic;
+    } else if (topic.subtopic?.length > 0) {
+      const found = findTopicById(topic.subtopic, topicID);
+      if (found) {
+        return found;
+      }
+    }
+  }
+
+  return null;
 }

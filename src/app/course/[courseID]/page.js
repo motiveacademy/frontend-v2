@@ -2,7 +2,7 @@ import {
   getCourse,
   getCourseTopic,
   getCourseTrailer,
-  getLastWatched,
+  getWatchedData,
 } from "@/commons/services/course";
 import { getUser } from "@/commons/services/user";
 import { getCurrentUser } from "@/commons/services/user/current";
@@ -18,24 +18,28 @@ const CoursePage = async ({ params }) => {
   const courseTopic = await getCourseTopic([course.pid, "topic"]);
 
   let userData = null;
-  let lastWatched = null;
+  let userWatchData = null;
   
   if (userID !== 403) {
     userData = await getUser(userID);
-    lastWatched = await getLastWatched(userID, course.pid);
+    userWatchData = await getWatchedData(userID, course.pid);
   }
 
   const courseData = {
     ...course,
     topic: courseTopic,
     trailer: courseTrailer,
-    lastWatched,
   };
+
+  const userFullData = {
+    ...userData,
+    ...userWatchData
+  }
 
   return (
     <main className="flex p-16 space-x-8">
-      <DetailCourse data={courseData} userData={userData} />
-      <OverviewCourse data={courseData} userData={userData} />
+      <DetailCourse data={courseData} userData={userFullData} />
+      <OverviewCourse data={courseData} userData={userFullData} />
     </main>
   );
 };

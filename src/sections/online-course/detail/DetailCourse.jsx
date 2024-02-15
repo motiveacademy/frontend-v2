@@ -26,12 +26,12 @@ const DetailCourse = ({ data, userData }) => {
             </p>
             <div>
               <p className="">Last Watched</p>
-              <p className="text-xl font-bold">Apa Itu Berkah</p>
+              <p className="text-xl font-bold">{userData.lastWatched.name}</p>
             </div>
           </div>
           <DefaultButton
             isLink={true}
-            href={`/course/${data.id}/watch/${data.lastWatched.id}`}
+            href={`/course/${data.id}/watch/${userData.lastWatched.id}`}
           >
             Continue Learning
           </DefaultButton>
@@ -80,6 +80,7 @@ const DetailCourse = ({ data, userData }) => {
               isTopicMain={true}
               eligible={eligible}
               courseID={data.id}
+              watchedData={userData.completedVideo}
             />
           ))}
         </div>
