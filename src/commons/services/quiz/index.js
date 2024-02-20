@@ -68,16 +68,8 @@ export async function getQuiz(courseID, quizID) {
   return quiz;
 }
 
-export async function getQuizStatus(userID, productID, quizID) {
-  const quizRef = doc(
-    db,
-    "users",
-    userID,
-    "availableProduct",
-    productID,
-    "quiz",
-    quizID
-  );
+export async function getQuizStatus(userID, courseID, quizID) {
+  const quizRef = doc(db, "user", userID, "course", courseID, "quiz", quizID);
 
   const quizSnap = await getDoc(quizRef);
   return quizSnap.data();

@@ -5,7 +5,6 @@ import {
   getCurrentVid,
   getWatchedData,
 } from "@/commons/services/course";
-import { getUser } from "@/commons/services/user";
 import { getCurrentUser } from "@/commons/services/user/current";
 import CourseContent from "@/sections/online-course/watch/CourseContent";
 import WatchCourseHeader from "@/sections/online-course/watch/WatchCourseHeader";
