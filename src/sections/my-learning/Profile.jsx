@@ -1,9 +1,4 @@
 "use client"
-// import { getCurrentUser } from "@/commons/services/user/current";
-// import { cookies } from "next/headers";
-// import { redirect } from "next/navigation";
-// import { getUser } from "@/commons/services/user";
-// import { useState } from "react";
 const Profile = async(user) => {
   if (user && user.user)  {
     var profile = user.user
@@ -16,12 +11,7 @@ const Profile = async(user) => {
       <div className="p-16">
         <div className="p-8 bg-white shadow mt-24">
           <div className="text-center">
-            {/* <div className="grid grid-cols-1 text-center order-last md:order-first mt-20 md:mt-0">
-              <div>
-                <p className="font-bold text-gray-700 text-xl">22</p>
-                <p className="text-gray-400">Friends</p>
-              </div>
-            </div> */}
+            
             <div className="relative">
               <div className="w-24 h-24 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full p-2" viewBox="0 0 20 20" fill="currentColor">
