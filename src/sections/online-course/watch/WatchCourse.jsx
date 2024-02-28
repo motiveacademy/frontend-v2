@@ -26,7 +26,7 @@ const WatchCourse = ({ courseData, topicData, userData }) => {
     <section className="w-full">
       <div className="w-full bg-slate-900 px-16">
         <VideoPlayer
-          src={topicData.videoLink}
+          src={topicData.video}
           onEnded={lastWatchedHandler}
           autoplay={true}
         />

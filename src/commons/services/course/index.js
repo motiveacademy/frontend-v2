@@ -78,8 +78,7 @@ export async function getCourseTopic(parentIDs) {
 
       topicList.push({
         id: topic.id,
-        title: topicData.title,
-        topicNum: topicData.topicNum,
+        ...topicData,
         parentIDs,
       });
     });
