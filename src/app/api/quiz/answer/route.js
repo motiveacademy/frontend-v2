@@ -1,31 +1,26 @@
 import { NextResponse } from "next/server";
 import { db } from "@/commons/auth/config";
-import { collection, setDoc, doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 export async function POST(request) {
   const data = await request.json();
-  const answers = data.answerItem.answers;
-
-  const ansData = [];
-  for (let item in answers) {
-    ansData.push(answers[item]);
-  }
 
   const quizRef = doc(
     db,
-    "users",
+    "user",
     data.userID,
-    "availableProduct",
-    data.productID,
+    "course",
+    data.courseID,
     "quiz",
     data.quizID
   );
 
-  await setDoc(
-    quizRef,
-    { answerItem: ansData, status: data.answerItem.status },
-    data.quizID
-  ).catch((error) => {
+  const correctAns = data.answerData.filter((data) => data.isCorrect);
+
+  await setDoc(quizRef, {
+    answerItem: data.answerData,
+    score: Math.round((correctAns.length / data.answerData.length) * 100),
+  }).catch((error) => {
     console.log(error);
   });
 

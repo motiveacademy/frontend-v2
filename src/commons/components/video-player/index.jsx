@@ -1,10 +1,20 @@
-const VideoPlayer = ({ src }) => {
+const defaultEnd = () => {};
+
+const VideoPlayer = ({ src, coverImg = "", autoplay = false, onEnded }) => {
   return (
-    <div className="rounded-2xl shadow">
-      <video controls className="w-full aspect-video rounded-2xl">
-        <source src={src} type="video/mp4" />
-      </video>
-    </div>
+    <video
+      controls
+      controlsList="nodownload"
+      className="w-full aspect-video"
+      autoPlay={autoplay}
+      poster={coverImg}
+      onContextMenu={(e) => {
+        e.preventDefault();
+      }}
+      onEnded={onEnded ?? defaultEnd}
+    >
+      <source src={src} type="video/mp4" />
+    </video>
   );
 };
 

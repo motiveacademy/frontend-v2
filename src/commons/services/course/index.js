@@ -58,6 +58,11 @@ export async function addCourseTopic(courseID, parentIDs, topicData) {
   await setDoc(ref, topicData);
 }
 
+export async function addLastWatched(courseID, userID, data) {
+  const ref = doc(db, "user", userID, "course", courseID);
+  await setDoc(ref, data, { merge: true });
+}
+
 export async function getCourseTopic(parentIDs) {
   const ref = collection(db, "course", ...parentIDs);
   const topicQuery = query(ref, orderBy("topicNum"));
@@ -70,11 +75,12 @@ export async function getCourseTopic(parentIDs) {
 
     res.forEach(async (topic) => {
       const topicData = topic.data();
-  
+
       topicList.push({
         id: topic.id,
         title: topicData.title,
         topicNum: topicData.topicNum,
+        parentIDs,
       });
     });
 
@@ -86,52 +92,37 @@ export async function getCourseTopic(parentIDs) {
   }
 }
 
-// export function checkEligiblity(userData, productID) {
-//   const availableProduct = userData.availableProduct;
+export async function getWatchedData(userID, courseID) {
+  const ref = doc(db, "user", userID, "course", courseID);
+  const res = await getDoc(ref);
 
-//   let isEligible = false;
-//   if (availableProduct) {
-//     for (let itemID of availableProduct) {
-//       if (itemID === productID) {
-//         isEligible = true;
-//         break;
-//       }
-//     }
-//   }
+  if (res.exists()) {
+    return { ...res.data() };
+  } else {
+    return null;
+  }
+}
 
-//   return isEligible;
-// }
+export async function getCurrentVid(courseID, topicID) {
+  const videoRef = ref(storage, `course/${courseID}/videos/${topicID}/hd.mp4`);
+  const videoLink = await getDownloadURL(videoRef).catch((err) => {
+    return "";
+  });
 
-// export async function addCart(cartData, custID, orderID) {
-//   const reqData = {
-//     cartData,
-//     custID,
-//     orderID,
-//   };
+  return videoLink;
+}
 
-//   const res = await fetch(`${DOMAIN}/api/payment`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(reqData),
-//   });
+export function findTopicById(topicList, topicID) {
+  for (let topic of topicList) {
+    if (topic.id === topicID) {
+      return topic;
+    } else if (topic.subtopic?.length > 0) {
+      const found = findTopicById(topic.subtopic, topicID);
+      if (found) {
+        return found;
+      }
+    }
+  }
 
-//   const data = await res.json();
-//   return data;
-// }
-
-// export function createOrderID(userID, courseID) {
-//   const date = new Date();
-//   return `${userID}_${courseID}_${date
-//     .getTime()
-//     .toString()
-//     .slice(-7, -1)}`;
-// }
-
-// export async function getCoverImage(courseID){
-//   const coverPathRef = ref(storage, `courses/${courseID}/cover/cover.jpg`);
-//   const coverURL = await getDownloadURL(coverPathRef);
-
-//   return coverURL;
-// };
+  return null;
+}

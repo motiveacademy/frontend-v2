@@ -1,16 +1,35 @@
-import { getAllUser } from "@/commons/services/user";
-import AddTopicSection from "./AddTopicSection";
-import MoveUser from "./MoveUser";
+import { getQuiz } from "@/commons/services/quiz";
+import { db } from "@/commons/auth/config";
+import { setDoc, doc } from "firebase/firestore";
 
 const AdminPage = async () => {
-  // const userList = await getAllUser();
+  const quizID = "FfvaCGEFwwrn3ev3DNIn";
+  const quizData = await getQuiz("COU002", quizID);
 
-  return (
-    <main className="p-16">
-      {/* <AddTopicSection /> */}
-      {/* <MoveUser userList={userList} /> */}
-    </main>
-  );
+  const quiz2ID = "1709100834161";
+  let idx = 1
+  for (let item of quizData) {
+    const dbRef = doc(
+      db,
+      "course",
+      "course-PCO",
+      "quiz",
+      quiz2ID,
+      "question",
+      `question-${idx}`
+    );
+    
+    delete item.id;
+    console.log(item);
+
+    setDoc(dbRef, item, { merge: true }).catch((error) => {
+      console.log(error);
+    });
+
+    idx += 1
+  }
+
+  return <main className="p-16"></main>;
 };
 
 export default AdminPage;

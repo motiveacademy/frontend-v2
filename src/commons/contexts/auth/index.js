@@ -6,7 +6,7 @@ const AuthContext = createContext();
 
 const AUTH_DEFAULT_VALUE = {
   isAuth: false,
-  token: null
+  uid: null
 };
 
 export const AuthContextProvider = ({ children }) => {
