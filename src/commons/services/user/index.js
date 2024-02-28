@@ -24,7 +24,6 @@ export async function getAllUser() {
 export async function getUser(userID) {
   const userRef = doc(db, "user", userID);
   const userSnap = await getDoc(userRef);
-
   return {
     id: userSnap.id,
     ...userSnap.data(),
