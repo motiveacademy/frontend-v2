@@ -25,7 +25,7 @@ const WatchCoursePage = async ({ params }) => {
   const courseTopic = await getCourseTopic([course.pid, "topic"]);
   const currentTopic = await findTopicById(courseTopic, topicID);
   const userWatchedData = await getWatchedData(userID, course.pid);
-  const vidLink = await getCurrentVid("course-KBO", "apa-itu-berkah");
+  // const vidLink = await getCurrentVid("course-KBO", "apa-itu-berkah");
 
   const quizList = await getAllQuiz(course.pid);
 
@@ -37,8 +37,10 @@ const WatchCoursePage = async ({ params }) => {
   const topicData = {
     id: topicID,
     name: currentTopic?.title ?? "",
-    videoLink: vidLink,
+    videoLink: currentTopic.video,
   };
+
+  console.log(currentTopic)
 
   const userData = {
     ...userWatchedData,
@@ -54,7 +56,7 @@ const WatchCoursePage = async ({ params }) => {
         />
         <WatchCourse
           courseData={course}
-          topicData={topicData}
+          topicData={currentTopic}
           userData={userData}
         />
       </div>
