@@ -19,7 +19,7 @@ const OverviewCourse = ({ data, userData }) => {
     if (userData?.availableProduct?.includes(data.pid)) {
       setEligibile(true);
     }
-  });
+  }, []);
 
   const courseHandler = async () => {
     if (userData.isLogin) {

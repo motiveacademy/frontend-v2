@@ -14,7 +14,7 @@ const DetailCourse = ({ data, userData }) => {
     if (userData?.availableProduct?.includes(data.pid)) {
       setEligibile(true);
     }
-  });
+  }, []);
 
   return (
     <section className="w-full max-w-[65vw] pr-16 text-primary-green space-y-8">

@@ -13,16 +13,12 @@ const CourseQuiz = ({ courseID, quizData }) => {
           {quizData.map((quiz) => (
             <Link
               prefetch={false}
+              key={quiz.id}
               href={`/course/${courseID}/quiz/${quiz.id}`}
             >
-              <div
-                className={`bg-slate-100 border p-4 flex items-center justify-between gap-x-6 hover:cursor-pointer hover:bg-slate-300`}
-                key={quiz.id}
-              >
+              <div className="bg-slate-100 border p-4 flex items-center justify-between gap-x-6 hover:cursor-pointer hover:bg-slate-300">
                 <p className="font-bold">{quiz.title}</p>
-                <p
-                  className={`px-4 py-2 rounded border border-primary-green font-bold flex gap-x-2 items-center`}
-                >
+                <p className="px-4 py-2 rounded border border-primary-green font-bold flex gap-x-2 items-center">
                   <FontAwesomeIcon icon={faPencil} />
                   <span>Open</span>
                 </p>
