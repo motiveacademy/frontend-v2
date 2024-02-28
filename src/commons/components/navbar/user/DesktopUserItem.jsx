@@ -53,7 +53,7 @@ const DesktopUserItem = ({ authCookie }) => {
 
   if (auth.isAuth) {
     return (
-      <div className="flex items-center gap-x-4">
+      <div className="hidden md:flex items-center gap-x-4">
         <p className="text-xl hover:cursor-pointer hover:text-primary-green">
           <Link href="/cart">
             <FontAwesomeIcon icon={faCartShopping} />

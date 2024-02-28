@@ -1,6 +1,5 @@
 import "./globals.css";
 
-import Script from "next/script";
 import { Raleway, Lato } from "next/font/google";
 
 import NavbarWrapper from "@/commons/components/navbar/wrapper";
@@ -46,10 +45,6 @@ export default function RootLayout({ children }) {
         <body className="font-raleway">
           <NavbarWrapper />
           {children}
-          {/* <Script
-            src="https://app.sandbox.midtrans.com/snap/snap.js"
-            data-client-key={CLIENTKEY.production}
-          /> */}
           <Footer />
         </body>
       </AuthContextProvider>
