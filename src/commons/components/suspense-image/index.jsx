@@ -1,20 +1,22 @@
 "use client";
 
-import { getStaticPicture } from "@/commons/services/static-info"
-import { Suspense } from "react"
-
-const SuspenseImage = ({ src, alt }) => {
-	return <Suspense fallback={<FallbackImage />}>
-		<AsyncImage src={src} alt={alt} />
-	</Suspense>
-}
+import { getStaticPicture } from "@/commons/services/static-info";
+import { Suspense } from "react";
 
 const AsyncImage = async ({ src, alt }) => {
-	return <img src={await getStaticPicture(src)} alt={alt} />
-}
+  return <img src={await getStaticPicture(src)} alt={alt} />;
+};
 
 const FallbackImage = () => {
-	<div className="min-h-[2em] w-full bg-white"></div>
-}
+  return <div className="animate-pulse min-h-[10em] h-full w-full bg-slate-100 rounded"></div>;
+};
 
-export default SuspenseImage
+const SuspenseImage = ({ src, alt }) => {
+  return (
+    <Suspense fallback={<FallbackImage />}>
+      <AsyncImage src={src} alt={alt} />
+    </Suspense>
+  );
+};
+
+export default SuspenseImage;

@@ -2,7 +2,7 @@ import CourseTopicAccordion from "@/commons/components/product/course-topic-acco
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const CourseContent = ({ courseData, watchedData }) => {
+const CourseContent = ({ courseData, watchedData, quizData }) => {
   return (
     <section className="text-primary-green">
       <div>
@@ -26,6 +26,7 @@ const CourseContent = ({ courseData, watchedData }) => {
             eligible={true}
             courseID={courseData.id}
             watchedData={watchedData}
+            quizData={quizData}
           />
         ))}
       </div>

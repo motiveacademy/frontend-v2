@@ -1,15 +1,64 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+"use client";
+
 import CourseSummary from "../detail/CourseSummary";
+import DefaultButton from "@/commons/components/button";
 import {
-  faCircleCheck,
-  faCircleXmark,
-} from "@fortawesome/free-regular-svg-icons";
+  CorrectAnswer,
+  OtherAnswer,
+  YourAnswerCorect,
+  YourAnswerWrong,
+} from "./Answer";
+import DOMAIN from "@/commons/utils/environment";
+import { useAuth } from "@/commons/contexts/auth";
+import { useState } from "react";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const QuizAnswer = ({ courseData, answerData, quizData }) => {
+  const [loading, setLoading] = useState(false);
+  const auth = useAuth();
+
+  const correctAns = answerData.filter((data) => data.isCorrect);
+  const scorePercentage = Math.round(
+    (correctAns.length / answerData.length) * 100
+  );
+
+  const retakeQuiz = async () => {
+    setLoading(true)
+
+    const retakeData = {
+      userID: auth.uid,
+      courseID: courseData.pid,
+      quizID: quizData.id,
+    };
+
+    const res = await fetch(`${DOMAIN}/api/quiz`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(retakeData),
+    });
+
+    const data = await res.json()
+    if (data.status === "OK") {
+      window.location.reload()
+    }
+  };
+
   return (
     <section className="w-full">
       <div className="w-full max-h-[75vh] px-16 py-8 overflow-y-scroll space-y-8 text-primary-green">
-        <h1 className="text-xl font-bold">Jawaban Quiz: {quizData.title}</h1>
+        <h1 className="text-xl font-bold">Quiz: {quizData.name}</h1>
+        <div className="flex flex-col text-center items-center space-y-4">
+          <h2 className="text-xl font-bold">Your Score</h2>
+          <p className="text-4xl font-bold font-lato border shadow-md shadow-slate-300 p-6 rounded-full w-fit">
+            {scorePercentage}
+          </p>
+          <p>
+            {correctAns.length}/{answerData.length} answer correct
+          </p>
+        </div>
 
         <div className="flex flex-col gap-y-8">
           {answerData.map((data) => (
@@ -23,60 +72,18 @@ const QuizAnswer = ({ courseData, answerData, quizData }) => {
                   if (data.isCorrect) {
                     if (item.correct) {
                       return (
-                        <p
-                          className="rounded bg-green-100 border border-green-300 p-2 flex justify-between items-center"
-                          key={idx}
-                        >
-                          <span>{item.answer}</span>
-                          <span className="text-primary-green">
-                            <FontAwesomeIcon icon={faCircleCheck} />
-                          </span>
-                        </p>
+                        <YourAnswerCorect answer={item.answer} key={idx} />
                       );
                     } else {
-                      return (
-                        <p
-                          className="rounded bg-blue-100 border border-blue-300 p-2"
-                          key={idx}
-                        >
-                          {item.answer}
-                        </p>
-                      );
+                      return <OtherAnswer answer={item.answer} key={idx} />;
                     }
                   } else {
                     if (item.correct) {
-                      return (
-                        <p
-                          className="rounded bg-green-100 border border-green-300 p-2 flex justify-between items-center"
-                          key={idx}
-                        >
-                          <span>{item.answer}</span>
-                          <span className="text-primary-green">
-                            <FontAwesomeIcon icon={faCircleCheck} />
-                          </span>
-                        </p>
-                      );
+                      return <CorrectAnswer answer={item.answer} key={idx} />;
                     } else if (item.answer === data.userAnswer) {
-                      return (
-                        <p
-                          className="rounded bg-red-100 border border-red-300 p-2 flex justify-between items-center"
-                          key={idx}
-                        >
-                          <span>{item.answer}</span>
-                          <span className="text-red-500">
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                          </span>
-                        </p>
-                      );
+                      return <YourAnswerWrong answer={item.answer} key={idx} />;
                     } else {
-                      return (
-                        <p
-                          className="rounded bg-blue-100 border border-blue-300 p-2"
-                          key={idx}
-                        >
-                          {item.answer}
-                        </p>
-                      );
+                      return <OtherAnswer answer={item.answer} key={idx} />;
                     }
                   }
                 })}
@@ -84,6 +91,16 @@ const QuizAnswer = ({ courseData, answerData, quizData }) => {
             </div>
           ))}
         </div>
+
+        {scorePercentage < 100 ? (
+          loading ? (
+            <FontAwesomeIcon icon={faCircleNotch} spin />
+          ) : (
+            <DefaultButton onClick={retakeQuiz}>Retake Quiz</DefaultButton>
+          )
+        ) : (
+          <></>
+        )}
       </div>
       <CourseSummary courseData={courseData} />
     </section>

@@ -14,17 +14,7 @@ import {
   faSquareCaretRight,
 } from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
-
-const topicNumStyling = [
-  "bg-red-100",
-  "bg-orange-100",
-  "bg-yellow-100",
-  "bg-lime-100",
-  "bg-emerald-100",
-  "bg-cyan-100",
-  "bg-violet-100",
-  "bg-fuchsia-100",
-];
+import QuizBox from "./QuizBox";
 
 const CourseTopicAccordion = ({
   data,
@@ -32,8 +22,11 @@ const CourseTopicAccordion = ({
   eligible,
   courseID,
   watchedData,
+  quizData = [],
 }) => {
   const [openSubtopic, setOpenSubtopic] = useState(false);
+  const quizInTopic = quizData.filter((quiz) => quiz.topic === data.id);
+  quizInTopic.sort((quiz1, quiz2) => quiz1.order - quiz2.order);
 
   if (data.subtopic?.length > 0) {
     return (
@@ -43,7 +36,17 @@ const CourseTopicAccordion = ({
           onClick={() => setOpenSubtopic(!openSubtopic)}
         >
           <div className="space-y-1">
-            <p className="font-bold">{data.title}</p>
+            <p className="font-bold">
+              {isTopicMain ? (
+                <span>
+                  Section <span className="font-lato">{data.topicNum}</span>
+                  {" : "}
+                </span>
+              ) : (
+                ""
+              )}
+              {data.title}
+            </p>
             <p className="flex items-end gap-x-2">
               <span className="text-primary-green">
                 <FontAwesomeIcon icon={faTv} />
@@ -79,7 +82,11 @@ const CourseTopicAccordion = ({
               eligible={eligible}
               courseID={courseID}
               watchedData={watchedData}
+              quizData={quizData}
             />
+          ))}
+          {quizInTopic.map((quiz) => (
+            <QuizBox data={quiz} courseID={courseID} key={quiz.id} />
           ))}
         </div>
       </div>
@@ -107,7 +114,17 @@ const CourseTopicAccordion = ({
                 <FontAwesomeIcon icon={faSquareCaretRight} />
               )}
             </p>
-            <p className="font-bold">{data.title}</p>
+            <p className="font-bold">
+              {isTopicMain ? (
+                <span>
+                  Section <span className="font-lato">{data.topicNum}</span>
+                  {" : "}
+                </span>
+              ) : (
+                ""
+              )}
+              {data.title}
+            </p>
           </div>
           {eligible && (
             <p

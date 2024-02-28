@@ -1,9 +1,12 @@
-"use client"
+"use client";
 
 import VideoPlayer from "@/commons/components/video-player";
 import { addLastWatched } from "@/commons/services/course";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
-import { faFeather, faPersonChalkboard } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFeather,
+  faPersonChalkboard,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const WatchCourse = ({ courseData, topicData, userData }) => {
@@ -11,18 +14,22 @@ const WatchCourse = ({ courseData, topicData, userData }) => {
     const data = {
       lastWatched: {
         id: topicData.id,
-        name: topicData.name
+        name: topicData.name,
       },
-      completedVideo: [...userData.completedVideo, topicData.id]
-    }
+      completedVideo: [...userData.completedVideo, topicData.id],
+    };
 
-    await addLastWatched(courseData.pid, userData.userID, data)
-  }
+    await addLastWatched(courseData.pid, userData.userID, data);
+  };
 
   return (
     <section className="w-full">
       <div className="w-full bg-slate-900 px-16">
-         <VideoPlayer src={topicData.videoLink} onEnded={lastWatchedHandler} />
+        <VideoPlayer
+          src={topicData.videoLink}
+          onEnded={lastWatchedHandler}
+          autoplay={true}
+        />
       </div>
 
       <div className="border-t border pt-4 px-8 pb-16 text-primary-green space-y-8">

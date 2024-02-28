@@ -16,7 +16,7 @@ const AllCourse = ({ courseList }) => {
         </p>
       </div>
 
-      <div className="flex gap-8">
+      <div className="flex flex-wrap gap-8">
         {courseList.map((course) => (
           <CourseBox data={course} key={course.id} />
         ))}

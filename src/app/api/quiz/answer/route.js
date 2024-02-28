@@ -15,9 +15,11 @@ export async function POST(request) {
     data.quizID
   );
 
+  const correctAns = data.answerData.filter((data) => data.isCorrect);
+
   await setDoc(quizRef, {
     answerItem: data.answerData,
-    status: "FINISHED",
+    score: Math.round((correctAns.length / data.answerData.length) * 100),
   }).catch((error) => {
     console.log(error);
   });
