@@ -18,11 +18,7 @@ const signIn = () => {
       });
     })
     .catch((error) => {
-      // Handle Errors here.
-      console.log(error);
-      // return res
-      //   .status(500)
-      //   .json({ message: "Terdapat kesalahan dalam sistem" });
+      console.error(error);
     });
 };
 
