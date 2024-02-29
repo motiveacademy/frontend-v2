@@ -17,9 +17,9 @@ const DetailCourse = ({ data, userData }) => {
   }, []);
 
   return (
-    <section className="w-full max-w-[65vw] pr-16 text-primary-green space-y-8">
+    <section className="w-full md:max-w-[65vw] md:pr-16 text-primary-green space-y-8">
       {eligible && (
-        <div className="w-full flex justify-between items-center bg-slate-100 rounded py-4 px-8">
+        <div className="w-full flex flex-col md:flex-row gap-y-4 md:justify-between md:items-center bg-slate-100 rounded py-4 px-8">
           <div className="flex items-center space-x-4">
             <p className="text-2xl">
               <FontAwesomeIcon icon={faCirclePlay} />
