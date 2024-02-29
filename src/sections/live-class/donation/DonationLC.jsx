@@ -72,15 +72,15 @@ const DonationLC = ({ data }) => {
   };
 
   return (
-    <section className="text-primary-green max-w-[25vw] px-8 space-y-4">
+    <section className="text-primary-green md:max-w-[25vw] md:px-8 space-y-4">
       <p className="font-bold text-lg">
-        Apakah Live Class ini memberikan value untukmu?
+        Support Motive
       </p>
       <p>
         Kamu dapat membantu mengembangkan live class serta platform Motive
         Academy menjadi lebih baik lagi dengan memberikan donasi.
       </p>
-      <div className="space-y-2">
+      <div className="space-y-4">
         <p className="font-bold">Jumlah Donasi</p>
         <div className="space-y-1 font-bold">
           <div

@@ -24,7 +24,7 @@ const TestiLC = ({ testiList }) => {
   // });
 
   return (
-    <section className="text-primary-green space-y-4 max-w-[20vw]">
+    <section className="text-primary-green space-y-4 md:max-w-[20vw]">
       <h2 className="text-xl font-bold">
         <span className="text-lg mr-2">
           <FontAwesomeIcon icon={faFeather} />

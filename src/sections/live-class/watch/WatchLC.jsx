@@ -1,8 +1,10 @@
+"use client"
+
 import VideoPlayer from "@/commons/components/video-player";
 
 const WatchLC = ({ data }) => {
   return (
-    <section className="w-full max-w-[70vw] space-y-8">
+    <section className="w-full md:max-w-[70vw] space-y-8">
       <div className="rounded bg-slate-900 px-16">
         <VideoPlayer src={data.recordLink} />
       </div>

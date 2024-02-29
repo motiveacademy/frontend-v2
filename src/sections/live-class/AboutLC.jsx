@@ -1,6 +1,6 @@
 const AboutLC = () => {
   return (
-    <section className="px-32 py-16 bg-primary-green text-primary-white space-y-4">
+    <section className="px-16 md:px-32 py-16 bg-primary-green text-primary-white space-y-4">
       <h1 className="font-bold text-2xl">Motive Live Class</h1>
       <p className="max-w-prose leading-7">
         Motive Live Class adalah webinar bulanan Motive Academy yang menawarkan

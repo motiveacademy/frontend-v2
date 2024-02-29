@@ -10,14 +10,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const OnGoingLC = ({ data }) => {
   return (
-    <section className="rounded shadow-xl border border-neutral-300 m-16 p-8 space-y-8 text-primary-green">
+    <section className="self-center rounded shadow-xl border border-neutral-300 m-16 p-8 space-y-8 text-primary-green">
       <h2 className="text-xl font-bold">
         <span className="text-lg mr-2">
           <FontAwesomeIcon icon={faBullhorn} transform={{ rotate: -15 }} />
         </span>
         Live Class Terbaru
       </h2>
-      <div className="flex gap-x-8">
+      <div className="flex flex-col md:flex-row gap-8">
         <div className="max-w-sm">
           <SuspenseImage src={`/live-class/${data.id}/poster.png`} />
         </div>
@@ -31,7 +31,7 @@ const OnGoingLC = ({ data }) => {
               {data.date.getUTCFullYear()}
             </p>
             <p className="text-2xl font-bold">{data.name}</p>
-            <p className="leading-7">{data.description}</p>
+            <p className="leading-7 ">{data.description}</p>
           </div>
           <div className="space-y-2">
             <p className="w-fit font-bold pb-1 border-b">Save The Date</p>
