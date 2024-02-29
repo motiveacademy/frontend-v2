@@ -2,12 +2,13 @@ import "./globals.css";
 
 import { Raleway, Lato } from "next/font/google";
 
-import NavbarWrapper from "@/commons/components/navbar/wrapper";
 import { AuthContextProvider } from "@/commons/contexts/auth";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import Footer from "@/commons/components/footer";
+import Navbar from "@/commons/components/navbar";
+import AuthWrapper from "@/commons/auth/AuthWrapper";
 
 config.autoAddCss = false; /* eslint-disable import/first */
 
@@ -43,7 +44,8 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`scroll-smooth ${raleway.variable} ${lato.variable}`}>
       <AuthContextProvider>
         <body className="font-raleway">
-          <NavbarWrapper />
+          <AuthWrapper />
+          <Navbar />
           {children}
           <Footer />
         </body>
