@@ -13,17 +13,17 @@ const BENEFITS = [
 
 const HeroSection = ({ latestCourse, latestLiveClass }) => {
   return (
-    <section className="min-h-screen bg-[url('/bg/masjid-unsplash.jpg')] bg-cover p-16 flex flex-col gap-y-6">
-      <div className="space-y-2 text-primary-green font-bold">
+    <section className="min-h-screen bg-[url('/bg/masjid-unsplash.jpg')] bg-cover px-8 py-16 md:p-16 flex flex-col gap-y-6">
+      <div className="space-y-2 text-primary-green font-bold text-center md:text-left">
         <h1 className="text-4xl">Belajar dan Bertumbuh</h1>
         <h2 className="text-xl">
           sebagai Pemuda Muslim
         </h2>
       </div>
 
-      <div className="flex flex-row gap-x-2">
-        {BENEFITS.map((benefit, idx) => (
-          <div key={benefit}>
+      <div className="hidden md:flex flex-row gap-2">
+        {BENEFITS.map((benefit) => (
+          <div key={benefit} className="w-fit self-center">
             <p
               className="space-x-2 px-4 py-1 bg-primary-green text-white rounded-full"
             >
@@ -34,7 +34,7 @@ const HeroSection = ({ latestCourse, latestLiveClass }) => {
         ))}
       </div>
 
-      <div className="flex flex-row gap-x-8">
+      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
         <LatestCourse data={latestCourse} />
         <LatestLC data={latestLiveClass} />
       </div>

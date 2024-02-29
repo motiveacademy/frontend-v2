@@ -41,7 +41,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`scroll-smooth ${raleway.variable} ${lato.variable}`}>
+    <html lang="en" className={`w-full h-full scroll-smooth ${raleway.variable} ${lato.variable}`}>
       <AuthContextProvider>
         <body className="font-raleway">
           <AuthWrapper />

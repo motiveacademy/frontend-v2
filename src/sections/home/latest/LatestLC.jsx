@@ -11,8 +11,8 @@ const LatestLC = ({ data }) => {
       Live Class Terbaru
     </p>
 
-    <div className="flex pl-8 gap-x-4">
-      <div className='w-[50%] max-w-sm'>
+    <div className="flex flex-col lg:flex-row pl-8 gap-4">
+      <div className='w-full md:w-[50%] md:max-w-sm'>
         <SuspenseImage src={`live-class/${data.id}/poster.png`} />
       </div>
       <div className="space-y-2">

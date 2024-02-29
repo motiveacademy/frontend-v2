@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const PreviousLC = ({ lcList }) => {
   return (
-    <section className="w-full max-w-[70vw] text-primary-green space-y-8">
+    <section className="w-full md:max-w-[70vw] text-primary-green space-y-8">
       <h2 className="text-xl font-bold">
         <span className="text-lg mr-2">
           <FontAwesomeIcon icon={faClockRotateLeft} />
@@ -18,8 +18,8 @@ const PreviousLC = ({ lcList }) => {
       </h2>
       <div className="space-y-16">
         {lcList.map((lc) => (
-          <div className="flex gap-x-8" key={lc.id}>
-            <div className="max-w-sm relative text-black z-0">
+          <div className="flex flex-col md:flex-row gap-8 border p-4 rounded" key={lc.id}>
+            <div className="md:max-w-sm relative text-black z-0">
               <SuspenseImage
                 src={`live-class/juli-2023/preview/Screenshot (345).png`}
                 alt="previous live class documentary"
