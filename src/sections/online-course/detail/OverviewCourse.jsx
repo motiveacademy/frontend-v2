@@ -47,7 +47,7 @@ const OverviewCourse = ({ data, userData }) => {
   };
 
   return (
-    <section className="w-full h-fit max-w-[30vw] bg-white shadow rounded-2xl p-8 space-y-4 text-primary-green">
+    <section className="w-full h-fit md:max-w-[30vw] bg-white shadow rounded-2xl p-8 space-y-4 text-primary-green">
       <VideoPlayer src={data.trailer} coverImg={data.cover} />
       <div className="">
         <p className="text-xl mt-4 mb-8">
@@ -55,7 +55,7 @@ const OverviewCourse = ({ data, userData }) => {
         </p>
         {!eligible && (
           <div className="flex justify-between items-center pt-4 border-t border-slate-300">
-            <p className="font-lato font-bold text-2xl">Rp{data.normalPrice}</p>
+            <p className="font-lato font-bold text-lg md:text-xl">Rp{data.normalPrice}</p>
             {loading ? (
               <p className="text-2xl my-2">
                 <FontAwesomeIcon icon={faCircleNotch} spin={true} />
