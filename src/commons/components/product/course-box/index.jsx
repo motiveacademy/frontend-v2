@@ -1,3 +1,4 @@
+import { formatPrice } from "@/commons/utils/price";
 import DefaultButton from "../../button";
 import SuspenseImage from "../../suspense-image";
 
@@ -15,7 +16,7 @@ const CourseBox = ({ data }) => {
         </p>
 
         <p className="text-xl text-primary-green font-bold font-lato">
-          Rp{data.normalPrice}
+          Rp{formatPrice(data.normalPrice)}
         </p>
         <DefaultButton isLink={true} href={`/course/${data.id}`}>
           Detail

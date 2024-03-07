@@ -27,3 +27,30 @@ body {
 .has-tooltip {
   @apply relative;
 }
+
+.show-menu {
+  display: block;
+  animation: slideIn 0.5s forwards;
+}
+
+.hide-menu {
+  animation: slideOutRight 0.5s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

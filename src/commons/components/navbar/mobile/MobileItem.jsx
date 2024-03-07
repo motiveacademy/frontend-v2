@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 
-const DesktopItem = () => {
+const MobileItem = () => {
   return (
-    <div className="hidden md:flex items-center text-primary-green font-medium space-x-4">
+    <div className="flex flex-col absolute bottom-0 md:hidden text-primary-green font-medium space-x-4">
       <Link
         href="/course"
         className="hover:cursor-pointer hover:underline hover:font-bold"
@@ -27,4 +27,4 @@ const DesktopItem = () => {
   );
 };
 
-export default DesktopItem;
+export default MobileItem;

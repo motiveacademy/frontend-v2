@@ -6,6 +6,7 @@ import {
   collection,
   query,
   orderBy,
+  where,
 } from "firebase/firestore";
 
 export async function getDetailLiveClass(id) {
@@ -27,7 +28,7 @@ export async function getDetailLiveClass(id) {
 
 export async function getAllLiveClasses() {
   const ref = collection(db, "live-class");
-  const que = query(ref, orderBy("dates", "desc"));
+  const que = query(ref, where("status", "==", "PUBLISHED"), orderBy("dates", "desc"));
   const res = await getDocs(que);
 
   const liveClassList = [];
