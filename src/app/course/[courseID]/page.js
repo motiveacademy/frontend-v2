@@ -43,7 +43,7 @@ const CoursePage = async ({ params }) => {
   };
 
   return (
-    <main className="flex flex-col-reverse md:flex-row py-16 px-8 md:p-16 gap-8">
+    <main className="flex flex-col-reverse md:flex-row py-16 px-8 md:p-16 gap-8 relative">
       <DetailCourse data={courseData} userData={userFullData} />
       <OverviewCourse data={courseData} userData={userFullData} />
     </main>
