@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const OnGoingLC = ({ data }) => {
   return (
-    <section className="self-center rounded shadow-xl border border-neutral-300 m-16 p-8 space-y-8 text-primary-green">
+    <section className="self-center rounded shadow-xl border border-neutral-300 mx-4 md:mx-16 my-16 p-8 space-y-8 text-primary-green">
       <h2 className="text-xl font-bold">
         <span className="text-lg mr-2">
           <FontAwesomeIcon icon={faBullhorn} transform={{ rotate: -15 }} />

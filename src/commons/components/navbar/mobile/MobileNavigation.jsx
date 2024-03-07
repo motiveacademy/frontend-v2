@@ -35,7 +35,7 @@ const MobileNavigation = () => {
         )}
       </div>
 
-      <div className={`${openMenu ? "show-menu" : "hide-menu"} absolute top-0 w-full h-screen mt-16`}>
+      <div className={`${openMenu ? "show-menu" : "hide-menu hidden"} absolute top-0 w-full h-screen mt-16`}>
         <div className="w-full h-screen bg-white px-8 py-4 space-y-8" onClick={changeMenu}>
           <div className="space-y-4">
             <p className="uppercase text-slate-500 text-sm font-bold">

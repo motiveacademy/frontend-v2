@@ -12,7 +12,7 @@ const DesktopItem = () => {
         Online Course
       </Link>
       <Link
-        href="/live-class"
+        href="/liveclass"
         className="hover:cursor-pointer hover:underline hover:font-bold"
       >
         Live Class
