@@ -4,16 +4,22 @@ import { useEffect, useState } from "react";
 
 import DefaultButton from "@/commons/components/button";
 import VideoPlayer from "@/commons/components/video-player";
-import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleNotch,
+  faHourglassHalf,
+  faInfinity,
+  faVideo,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { addCart } from "@/commons/services/cart";
 import { hardRedirect } from "@/commons/services/redirect";
 import { useRouter } from "next/navigation";
+import { formatPrice } from "@/commons/utils/price";
 
 const OverviewCourse = ({ data, userData }) => {
   const [loading, setLoading] = useState();
   const [eligible, setEligibile] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     if (userData?.availableProduct?.includes(data.pid)) {
@@ -42,20 +48,49 @@ const OverviewCourse = ({ data, userData }) => {
 
       setLoading(false);
     } else {
-      router.push("/signin")
+      router.push("/signin");
     }
   };
 
   return (
-    <section className="w-full h-fit md:max-w-[30vw] bg-white shadow rounded-2xl p-8 space-y-4 text-primary-green">
+    <section className="w-full h-fit md:fixed md:right-8 md:max-w-[40vw] lg:max-w-[30vw] bg-white shadow-md rounded-2xl p-4 lg:p-8 space-y-4 text-primary-green">
       <VideoPlayer src={data.trailer} coverImg={data.cover} />
-      <div className="">
-        <p className="text-xl mt-4 mb-8">
+      <div className="space-y-4">
+        <p className="text-xl mt-4">
           <span className="font-bold">Course </span>Intro
         </p>
+
+        <div className="flex flex-wrap gap-4">
+          <div className="h-fit bg-slate-100 rounded-xl p-4">
+            <p className="mb-2 text-primary-green">
+              <FontAwesomeIcon icon={faVideo} />
+            </p>
+            <p className="md:text-lg font-bold">20</p>
+            <p>videos</p>
+          </div>
+
+          <div className="h-fit bg-slate-100 rounded-xl p-4">
+            <p className="mb-2 text-primary-green">
+              <FontAwesomeIcon icon={faHourglassHalf} />
+            </p>
+            <p className="md:text-lg font-bold">1 Hour</p>
+            <p>total duration</p>
+          </div>
+
+          <div className="h-fit bg-slate-100 rounded-xl p-4">
+            <p className="mb-2 text-primary-green">
+              <FontAwesomeIcon icon={faInfinity} />
+            </p>
+            <p className="md:text-lg font-bold">Unlimited</p>
+            <p>Lifetime Access</p>
+          </div>
+        </div>
+
         {!eligible && (
           <div className="flex justify-between items-center pt-4 border-t border-slate-300">
-            <p className="font-lato font-bold text-lg md:text-xl">Rp{data.normalPrice}</p>
+            <p className="font-lato font-bold text-lg md:text-xl">
+              Rp{formatPrice(data.normalPrice)}
+            </p>
             {loading ? (
               <p className="text-2xl my-2">
                 <FontAwesomeIcon icon={faCircleNotch} spin={true} />
