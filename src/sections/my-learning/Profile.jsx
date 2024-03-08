@@ -81,9 +81,9 @@ const Profile = async (user) => {
               <li className="me-2">
                   <a href="#" className={`inline-block p-4 text-gray-600  rounded-t-lg ${activeTab === 'profile' ? 'active text-blue-500 border-b-2 border-blue-500' : ''}`} active="true" onClick={showSection.bind(null, 'profile')} >Profile</a>
               </li>
-              <li className="me-2">
+              {/* <li className="me-2">
                   <a href="#" className={`inline-block p-4 text-gray-600 rounded-t-lg ${activeTab === 'products' ? 'active text-blue-500 border-b-2 border-blue-500' : ''}`} onClick={showSection.bind(null, 'products')}>My Products</a>
-              </li>
+              </li> */}
           </ul>
       </div>
 

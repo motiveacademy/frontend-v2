@@ -37,6 +37,23 @@ body {
   animation: slideOutRight 0.5s forwards;
 }
 
+.slide-live-class {
+  animation: slideRight 8s linear infinite; /* Adjust duration and timing function as needed */
+}
+
+/* Optional: Style the scroll bar */
+.scroll-container::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scrollbar track */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(100%);
@@ -52,5 +69,14 @@ body {
   }
   to {
     transform: translateX(100%);
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
