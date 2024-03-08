@@ -18,10 +18,10 @@ const PreviousLC = ({ lcList }) => {
       </h2>
       <div className="space-y-16">
         {lcList.map((lc) => (
-          <div className="flex flex-col md:flex-row gap-8 border p-4 rounded" key={lc.id}>
-            <div className="md:max-w-sm relative text-black z-0">
+          <div className="flex flex-col lg:grid lg:grid-cols-[max-content_1fr] gap-8 border p-4 rounded" key={lc.id}>
+            <div className="lg:max-w-sm relative text-black z-0">
               <SuspenseImage
-                src={`live-class/juli-2023/preview/Screenshot (345).png`}
+                src={`/live-class/${lc.id}/poster.png`}
                 alt="previous live class documentary"
               />
               <div className="absolute top-0 right-0 flex items-center h-full w-[2em] bg-gradient-to-r from-transparent to-slate-500/80 opacity-0 hover:opacity-100 hover:cursor-pointer">
@@ -39,7 +39,7 @@ const PreviousLC = ({ lcList }) => {
               </p>
               <p className="text-2xl font-bold">{lc.name}</p>
               <p className="leading-7">{lc.description}</p>
-              <DefaultButton isLink={true} href={`/live-class/${lc.id}`}>
+              <DefaultButton isLink={true} href={`/liveclass/${lc.id}`}>
                 Tonton Rekaman
               </DefaultButton>
             </div>

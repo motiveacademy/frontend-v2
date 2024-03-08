@@ -40,8 +40,6 @@ const WatchCoursePage = async ({ params }) => {
     videoLink: currentTopic.video,
   };
 
-  console.log(currentTopic)
-
   const userData = {
     ...userWatchedData,
     userID,

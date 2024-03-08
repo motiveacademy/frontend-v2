@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const OnGoingLC = ({ data }) => {
+  const today = new Date();
   return (
     <section className="self-center rounded shadow-xl border border-neutral-300 mx-4 md:mx-16 my-16 p-8 space-y-8 text-primary-green">
       <h2 className="text-xl font-bold">
@@ -54,9 +55,13 @@ const OnGoingLC = ({ data }) => {
               Zoom Meeting
             </p>
           </div>
-          <DefaultButton isLink={true} href={`/live-class/${data.id}`}>
-            Tonton Rekaman
-          </DefaultButton>
+          {today < data.date ? (
+            <DefaultButton isLink={true} href={data.registerLink}>
+              Daftar
+            </DefaultButton>
+          ) : (
+            <p className="font-bold italic text-sm">Tunggu Live Class kami selanjutnya!</p>
+          )}
         </div>
       </div>
     </section>

@@ -8,7 +8,7 @@ const AsyncImage = async ({ src, alt }) => {
 };
 
 const FallbackImage = () => {
-  return <div className="animate-pulse min-h-[10em] h-full w-full bg-slate-100 rounded"></div>;
+  return <div className="animate-pulse min-w-[10em] min-h-[10em] h-full w-full bg-slate-300 rounded"></div>;
 };
 
 const SuspenseImage = ({ src, alt }) => {
