@@ -6,7 +6,7 @@ const LiveClassBox = ({ data }) => {
     <div
       className="flex flex-col w-sm bg-gradient-to-b from-white to-white/80 p-4 space-y-4 shadow-xl rounded text-primary-green"
     >
-      <div className="w-max max-w-sm">
+      <div className="w-full max-w-sm">
         <SuspenseImage src={`live-class/${data.id}/poster.png`} />
       </div>
 
