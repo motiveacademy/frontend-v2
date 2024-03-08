@@ -24,7 +24,7 @@ const WatchCourse = ({ courseData, topicData, userData }) => {
 
   return (
     <section className="w-full">
-      <div className="w-full bg-slate-900 px-16">
+      <div className="w-full bg-slate-900 px-2 md:px-16">
         <VideoPlayer
           src={topicData.video}
           onEnded={lastWatchedHandler}
