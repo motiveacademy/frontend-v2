@@ -20,16 +20,6 @@ const WatchLC = ({ data }) => {
         </div>
 
         <p className="leading-7">{data.description}</p>
-
-        <div className="">
-          <p className="font-bold">
-            Terima kasih kepada organisasi berikut yang hadir dalam Live Class
-            ini!
-          </p>
-          {data.orgAudience.map((org) => (
-            <p key={org}>- {org}</p>
-          ))}
-        </div>
       </div>
     </section>
   );

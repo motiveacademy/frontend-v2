@@ -4,9 +4,9 @@ import SuspenseImage from "../../suspense-image"
 const LiveClassBox = ({ data }) => {
   return (
     <div
-      className="flex flex-col max-w-sm bg-gradient-to-b from-white to-white/80 p-4 space-y-4 shadow-xl rounded text-primary-green"
+      className="flex flex-col w-sm bg-gradient-to-b from-white to-white/80 p-4 space-y-4 shadow-xl rounded text-primary-green"
     >
-      <div>
+      <div className="w-max max-w-sm">
         <SuspenseImage src={`live-class/${data.id}/poster.png`} />
       </div>
 
