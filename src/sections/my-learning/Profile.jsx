@@ -4,28 +4,55 @@ import DefaultButton from "@/commons/components/button";
 import { useAuthContext } from "@/commons/contexts/auth";
 import { signOut } from "@/commons/services/logout";
 import { hardRedirect } from "@/commons/services/redirect";
-
+import { useState, useEffect } from "react";
+import { getCourse } from "@/commons/services/course";
 const Profile = async (user) => {
+  const [activeTab, setActiveTab] = useState('profile');
+  const [itemList, setItemList] = useState([]); // Initialize itemList state
+
   if (user && user.user) {
     var profile = user.user;
-    if (!profile.age)
-      // tes
-      console.log("tes");
   }
+ 
+  useEffect(() => { // Use useEffect to fetch courses when component mounts
+    const fetchCourses = async () => {
+      if (user && user.user && user.user.availableProduct) {
+        const products = user.user.availableProduct;
+        const courses = await Promise.all(products.map(getCourse));
+        setItemList(courses);
+      }
+    };
+    fetchCourses();
+  }, [user]); // Add user as dependency to fetch courses when user changes
 
-  const [auth, setAuth] = useAuthContext();
+  const { setAuth } = useAuthContext();
   const signOutHandler = () => {
     setAuth({
       isAuth: false,
       uid: null,
     });
-    
     signOut();
-    hardRedirect("/")
+    hardRedirect("/");
   };
 
+  // const [auth, setAuth] = useAuthContext();
+  // const signOutHandler = () => {
+  //   setAuth({
+  //     isAuth: false,
+  //     uid: null,
+  //   });
+    
+  //   signOut();
+  //   hardRedirect("/")
+  // };
+  // const [activeTab, setActiveTab] = useState('profile');
+  function showSection(sectionId) {
+    setActiveTab(sectionId);
+  }
+  // console.log(activeTab)
   return (
     <main className="min-h-screen p-16 space-y-8">
+      
       <div className="p-8 bg-white shadow mt-24">
         <div className="text-center">
           <div className="relative">
@@ -37,20 +64,35 @@ const Profile = async (user) => {
                 fill="currentColor"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 />
               </svg>
             </div>
           </div>
         </div>
-
-        <div className="mt-5 text-center border-b pb-12">
+        <div className="mt-5 text-center pb-12">
           <h1 className="text-4xl font-medium text-gray-700">{profile.name}</h1>
           <p className="font-light text-gray-600 mt-3">{profile.email}</p>
         </div>
-        <div className="justify-center px-20 py-5 grid gap-10 grid-cols-1 sm:grid-cols-2">
+        <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 ">
+          <ul className="flex flex-wrap -mb-px">
+              <li className="me-2">
+                  <a href="#" className={`inline-block p-4 text-gray-600  rounded-t-lg ${activeTab === 'profile' ? 'active text-blue-500 border-b-2 border-blue-500' : ''}`} active="true" onClick={showSection.bind(null, 'profile')} >Profile</a>
+              </li>
+              <li className="me-2">
+                  <a href="#" className={`inline-block p-4 text-gray-600 rounded-t-lg ${activeTab === 'products' ? 'active text-blue-500 border-b-2 border-blue-500' : ''}`} onClick={showSection.bind(null, 'products')}>My Products</a>
+              </li>
+          </ul>
+      </div>
+
+        
+
+
+
+
+        <div id="profile"  className={`${activeTab === 'profile' ? '' : 'hidden'} justify-center px-20 py-5 gap-10 grid-cols-1 sm:grid-cols-2`}>
           <div className="h-max">
             <p className="pb-2 font-light">Umur</p>
             <div className="w-full h-full p-2 px-5 rounded-sm bg-primary-yellow bg-opacity-20  font-light">
@@ -98,13 +140,31 @@ const Profile = async (user) => {
             </div>
           </div>
         </div>
+
+        <div id="products" className={`${activeTab === 'products' ? '' : 'hidden'} justify-center px-20 py-5 gap-10 grid-cols-1 sm:grid-cols-2`}>
+        {profile.availableProduct && profile.availableProduct.length > 0 ? (
+          <ul>
+            {profile.availableProduct.map((product, index) => (
+              <li key={index}>
+                <p className="text-sm font-semibold">{product}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm font-semibold">Belum ada produk yang tersedia.</p>
+        )}
+
+        </div>
       </div>
 
+
+      
       <div className="flex justify-center">
         <DefaultButton type="outlined" onClick={signOutHandler}>
           Logout
         </DefaultButton>
       </div>
+
     </main>
   );
 };
