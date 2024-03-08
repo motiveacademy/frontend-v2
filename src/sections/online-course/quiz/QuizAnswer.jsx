@@ -48,7 +48,7 @@ const QuizAnswer = ({ courseData, answerData, quizData }) => {
 
   return (
     <section className="w-full">
-      <div className="w-full max-h-[75vh] px-16 py-8 overflow-y-scroll space-y-8 text-primary-green">
+      <div className="w-full max-h-[75vh] px-8 md:px-16 py-8 overflow-y-scroll space-y-8 text-primary-green">
         <h1 className="text-xl font-bold">Quiz: {quizData.name}</h1>
         <div className="flex flex-col text-center items-center space-y-4">
           <h2 className="text-xl font-bold">Your Score</h2>

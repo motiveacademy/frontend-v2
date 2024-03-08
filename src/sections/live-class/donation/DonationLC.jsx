@@ -77,7 +77,7 @@ const DonationLC = ({ data }) => {
         Support Motive
       </p>
       <p>
-        Kamu dapat membantu mengembangkan live class serta platform Motive
+        Kamu dapat membantu mengembangkan Motive Live Class serta platform Motive
         Academy menjadi lebih baik lagi dengan memberikan donasi.
       </p>
       <div className="space-y-4">

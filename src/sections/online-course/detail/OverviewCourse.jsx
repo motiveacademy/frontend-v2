@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import DefaultButton from "@/commons/components/button";
 import VideoPlayer from "@/commons/components/video-player";
 import {
+  faCircleInfo,
   faCircleNotch,
+  faFileVideo,
   faHourglassHalf,
-  faInfinity,
-  faVideo,
+  faMobileScreen,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { addCart } from "@/commons/services/cart";
@@ -53,36 +54,32 @@ const OverviewCourse = ({ data, userData }) => {
   };
 
   return (
-    <section className="w-full h-fit md:fixed md:right-8 md:max-w-[40vw] lg:max-w-[30vw] bg-white shadow-md rounded-2xl p-4 lg:p-8 space-y-4 text-primary-green">
+    <section className="w-full h-fit md:fixed md:right-8 md:max-w-[40vw] lg:max-w-[30vw] bg-white shadow-md rounded-2xl p-4 lg:p-8 space-y-8 text-primary-green">
       <VideoPlayer src={data.trailer} coverImg={data.cover} />
       <div className="space-y-4">
         <p className="text-xl mt-4">
-          <span className="font-bold">Course </span>Intro
+          <span className="font-bold">Course </span>Overview
         </p>
 
-        <div className="flex flex-wrap gap-4">
-          <div className="h-fit bg-slate-100 rounded-xl p-4">
-            <p className="mb-2 text-primary-green">
-              <FontAwesomeIcon icon={faVideo} />
-            </p>
-            <p className="md:text-lg font-bold">20</p>
-            <p>videos</p>
+        <div className="flex flex-col gap-y-4">
+          <div className="flex flex-row align-bottom gap-x-2">
+            <FontAwesomeIcon icon={faFileVideo} />
+            <p className="font-bold font-lato">20 videos</p>
           </div>
 
-          <div className="h-fit bg-slate-100 rounded-xl p-4">
-            <p className="mb-2 text-primary-green">
-              <FontAwesomeIcon icon={faHourglassHalf} />
-            </p>
-            <p className="md:text-lg font-bold">1 Hour</p>
-            <p>total duration</p>
+          <div className="flex flex-row align-bottom gap-x-2">
+            <FontAwesomeIcon icon={faHourglassHalf} />
+            <p className="font-bold font-lato">1 Hour length</p>
           </div>
 
-          <div className="h-fit bg-slate-100 rounded-xl p-4">
-            <p className="mb-2 text-primary-green">
-              <FontAwesomeIcon icon={faInfinity} />
-            </p>
-            <p className="md:text-lg font-bold">Unlimited</p>
-            <p>Lifetime Access</p>
+          <div className="flex flex-row align-bottom gap-x-2">
+            <FontAwesomeIcon icon={faMobileScreen} />
+            <p className="font-bold font-lato">Access from Mobile & Desktop</p>
+          </div>
+
+          <div className="flex flex-row align-bottom gap-x-2">
+            <FontAwesomeIcon icon={faCircleInfo} />
+            <p className="font-bold font-lato">Unlimited lifetime access</p>
           </div>
         </div>
 
