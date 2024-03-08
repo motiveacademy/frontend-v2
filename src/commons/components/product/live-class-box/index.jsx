@@ -13,7 +13,7 @@ const LiveClassBox = ({ data }) => {
       <p className="text-xl font-bold">{data.name}</p>
       <div className="space-y-2">
         <p className="max-w-prose leading-7">{data.description.substring(0, 100)}...</p>
-        <DefaultButton isLink={true} href={`/live-class/${data.id}`}>Detail</DefaultButton>
+        <DefaultButton isLink={true} href={`/liveclass/${data.id}`}>Detail</DefaultButton>
       </div>
 
     </div>)
