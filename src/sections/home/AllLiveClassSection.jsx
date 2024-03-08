@@ -11,8 +11,10 @@ const AllLiveClassSection = ({ lcList }) => {
       <h3 className="text-lg">along with more than 30 organizations!</h3>
     </div>
 
-    <div className="flex flex-col md:flex-row gap-8 pb-8 md:overflow-x-scroll">
-      {lcList.map(lc => <LiveClassBox data={lc} key={lc.id} />)}
+    <div className="overflow-x-scroll scroll-container">
+      <div className="flex flex-col md:flex-row gap-8 pb-4">
+        {lcList.map(lc => <LiveClassBox data={lc} key={lc.id} />)}
+      </div>
     </div>
   </section>
 }
