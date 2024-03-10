@@ -14,8 +14,8 @@ export async function getDetailLiveClass(id) {
   const res = await getDoc(ref);
 
   const itemData = res.data();
-    const dates = getLiveClassDate(itemData.dates);
-    delete itemData.dates;
+  const dates = getLiveClassDate(itemData.dates);
+  delete itemData.dates;
 
   const data = {
     ...itemData,
@@ -28,7 +28,11 @@ export async function getDetailLiveClass(id) {
 
 export async function getAllLiveClasses() {
   const ref = collection(db, "live-class");
-  const que = query(ref, where("status", "==", "PUBLISHED"), orderBy("dates", "desc"));
+  const que = query(
+    ref,
+    where("status", "==", "PUBLISHED"),
+    orderBy("dates", "desc")
+  );
   const res = await getDocs(que);
 
   const liveClassList = [];
@@ -56,6 +60,11 @@ function getLiveClassDate(dates) {
       year: "numeric",
       month: "long",
       day: "numeric",
+    },
+    timeOptions: {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
     },
   };
 }
