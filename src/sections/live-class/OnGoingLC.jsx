@@ -46,7 +46,8 @@ const OnGoingLC = ({ data }) => {
               <span className="text-lg mr-2">
                 <FontAwesomeIcon icon={faClock} />
               </span>
-              {`${data.date.toLocaleTimeString("id-ID", data.timeOptions).replace(".", ":")} WIB`}
+              {/* {`${data.date.toLocaleTimeString("id-ID", data.timeOptions).replace(".", ":")} WIB`} */}
+              09:00 WIB
             </p>
             <p className="font-lato">
               <span className="text-lg mr-2">
