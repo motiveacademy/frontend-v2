@@ -34,21 +34,21 @@ const OnGoingLC = ({ data }) => {
             <p className="text-2xl font-bold">{data.name}</p>
             <p className="leading-7 ">{data.description}</p>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 ">
             <p className="w-fit font-bold pb-1 border-b">Save The Date</p>
-            <p>
-              <span className="text-lg mr-2 font-lato">
+            <p className="font-lato">
+              <span className="text-lg mr-2">
                 <FontAwesomeIcon icon={faCalendarDays} />
               </span>
               {data.date.toLocaleDateString("id-ID", data.dateOptions)}
             </p>
-            <p>
-              <span className="text-lg mr-2 font-lato">
+            <p className="font-lato">
+              <span className="text-lg mr-2">
                 <FontAwesomeIcon icon={faClock} />
               </span>
-              {`${data.date.getHours()}:${data.date.getMinutes()}`}
+              {`${data.date.toLocaleTimeString("en-US", data.timeOptions)} WIB`}
             </p>
-            <p>
+            <p className="font-lato">
               <span className="text-lg mr-2">
                 <FontAwesomeIcon icon={faDesktop} />
               </span>
@@ -60,7 +60,9 @@ const OnGoingLC = ({ data }) => {
               Daftar
             </DefaultButton>
           ) : (
-            <p className="font-bold italic text-sm">Tunggu Live Class kami selanjutnya!</p>
+            <p className="font-bold italic text-sm">
+              Tunggu Live Class kami selanjutnya!
+            </p>
           )}
         </div>
       </div>
