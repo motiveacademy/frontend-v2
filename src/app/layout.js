@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import { Raleway, Lato } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import { AuthContextProvider } from "@/commons/contexts/auth";
 
@@ -20,7 +21,7 @@ const raleway = Raleway({
 const lato = Lato({
   subsets: ["latin"],
   variable: "--font-lato",
-  weight:["100", "300", "400" , "700", "900"]
+  weight: ["100", "300", "400", "700", "900"],
 });
 
 const CLIENTKEY = {
@@ -41,7 +42,10 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`w-full h-full scroll-smooth ${raleway.variable} ${lato.variable}`}>
+    <html
+      lang="en"
+      className={`w-full h-full scroll-smooth ${raleway.variable} ${lato.variable}`}
+    >
       <AuthContextProvider>
         <body className="font-raleway">
           <AuthWrapper />
@@ -50,6 +54,7 @@ export default function RootLayout({ children }) {
           <Footer />
         </body>
       </AuthContextProvider>
+      <GoogleAnalytics gaId="G-V6Y6TFQ8Y5" />
     </html>
   );
 }
