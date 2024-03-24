@@ -44,6 +44,18 @@ export async function getCourse(courseID) {
   return courseData;
 }
 
+
+export async function getCourseByPID(pid) {
+  const docsRef = doc(db, "course", pid);
+  const res = await getDoc(docsRef);
+  let courseData = {};
+    courseData = {
+      ...res.data(),
+      pid: res.id,
+    };
+  return courseData
+}
+
 export async function getCourseTrailer(courseID) {
   const videoRef = ref(storage, `course/${courseID}/trailer.mp4`);
   const videoLink = await getDownloadURL(videoRef).catch((err) => {
