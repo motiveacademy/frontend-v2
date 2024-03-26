@@ -4,27 +4,14 @@ import DefaultButton from "@/commons/components/button";
 import { useAuthContext } from "@/commons/contexts/auth";
 import { signOut } from "@/commons/services/logout";
 import { hardRedirect } from "@/commons/services/redirect";
-import { useState, useEffect } from "react";
-import { getCourse } from "@/commons/services/course";
-const Profile = async (user) => {
+import { useState } from "react";
+import SuspenseImage from "@/commons/components/suspense-image";
+
+const Profile = ({user, courses}) => {
   const [activeTab, setActiveTab] = useState('profile');
-  const [itemList, setItemList] = useState([]); // Initialize itemList state
-
-  if (user && user.user) {
-    var profile = user.user;
-  }
+  const profile = user
  
-  useEffect(() => { // Use useEffect to fetch courses when component mounts
-    const fetchCourses = async () => {
-      if (user && user.user && user.user.availableProduct) {
-        const products = user.user.availableProduct;
-        const courses = await Promise.all(products.map(getCourse));
-        setItemList(courses);
-      }
-    };
-    fetchCourses();
-  }, [user]); // Add user as dependency to fetch courses when user changes
-
+  
   const { setAuth } = useAuthContext();
   const signOutHandler = () => {
     setAuth({
@@ -35,23 +22,11 @@ const Profile = async (user) => {
     hardRedirect("/");
   };
 
-  // const [auth, setAuth] = useAuthContext();
-  // const signOutHandler = () => {
-  //   setAuth({
-  //     isAuth: false,
-  //     uid: null,
-  //   });
-    
-  //   signOut();
-  //   hardRedirect("/")
-  // };
-  // const [activeTab, setActiveTab] = useState('profile');
   function showSection(sectionId) {
     setActiveTab(sectionId);
   }
-  // console.log(activeTab)
   return (
-    <main className="min-h-screen p-16 space-y-8">
+    <main className="min-h-screen p-4 md:p-8 lg:p-16 space-y-8">
       
       <div className="p-8 bg-white shadow mt-24">
         <div className="text-center">
@@ -81,9 +56,9 @@ const Profile = async (user) => {
               <li className="me-2">
                   <a href="#" className={`inline-block p-4 text-gray-600  rounded-t-lg ${activeTab === 'profile' ? 'active text-blue-500 border-b-2 border-blue-500' : ''}`} active="true" onClick={showSection.bind(null, 'profile')} >Profile</a>
               </li>
-              {/* <li className="me-2">
+              <li className="me-2">
                   <a href="#" className={`inline-block p-4 text-gray-600 rounded-t-lg ${activeTab === 'products' ? 'active text-blue-500 border-b-2 border-blue-500' : ''}`} onClick={showSection.bind(null, 'products')}>My Products</a>
-              </li> */}
+              </li>
           </ul>
       </div>
 
@@ -92,7 +67,7 @@ const Profile = async (user) => {
 
 
 
-        <div id="profile"  className={`${activeTab === 'profile' ? '' : 'hidden'} justify-center px-20 py-5 gap-10 grid-cols-1 sm:grid-cols-2`}>
+        <div id="profile"  className={`${activeTab === 'profile' ? '' : 'hidden'} justify-center lg:px-20 py-5 gap-10 grid-cols-1 sm:grid-cols-2`}>
           <div className="h-max">
             <p className="pb-2 font-light">Umur</p>
             <div className="w-full h-full p-2 px-5 rounded-sm bg-primary-yellow bg-opacity-20  font-light">
@@ -141,12 +116,26 @@ const Profile = async (user) => {
           </div>
         </div>
 
-        <div id="products" className={`${activeTab === 'products' ? '' : 'hidden'} justify-center px-20 py-5 gap-10 grid-cols-1 sm:grid-cols-2`}>
-        {profile.availableProduct && profile.availableProduct.length > 0 ? (
-          <ul>
-            {profile.availableProduct.map((product, index) => (
-              <li key={index}>
-                <p className="text-sm font-semibold">{product}</p>
+        <div id="products" className={`${activeTab === 'products' ? '' : 'hidden'} items-center text-center justify-center lg:px-20 py-5 `}>
+        {courses && courses.length > 0 ? (
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2" style={{ listStyleType: 'none', margin: '0', padding: '0' }}>
+            {courses.map((course, index) => (
+              <li key={index} className="flex-1">
+                <a href={`/course/${course.id}`} > 
+                <div className="flex flex-col p-4 h-full shadow-md shadow-slate-300 rounded">
+                  <div>
+                    <SuspenseImage src={`course/${course.pid}/cover.png`} />
+                  </div>
+
+                  <p className="text-md lg:text-xl text-primary-green font-bold">{course.name}</p>
+                  <div className="space-y-4 pt-2">
+                    <p className="text-sm md:text-md max-w-prose">
+                      {course.description?.substring(0, course.description?.indexOf('.') + 1)}
+                    </p>
+                  </div>
+                </div>
+                </a>
+
               </li>
             ))}
           </ul>
